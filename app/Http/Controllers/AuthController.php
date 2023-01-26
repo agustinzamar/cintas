@@ -18,6 +18,7 @@ class AuthController extends Controller
         $user = User::create($validated);
 
         $token = $user->createToken(config('app.name'))->plainTextToken;
+        $user->load('role');
 
         return new JsonResponse([
             'user' => $user,
@@ -47,7 +48,6 @@ class AuthController extends Controller
     public function logout(): JsonResponse
     {
         Auth::user()->currentAccessToken()->delete();
-
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 

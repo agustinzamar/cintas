@@ -5,14 +5,13 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { ListItem } from '@/layouts/Authenticated/ListItem';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ListSubheader from '@mui/material/ListSubheader';
+import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
 import PaymentIcon from '@mui/icons-material/Payment';
-import DiscountIcon from '@mui/icons-material/Discount';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
@@ -58,27 +57,23 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       <Divider />
       <List component="nav">
         <ListItem text="Inicio" icon={<DashboardIcon />} url="/" />
-        <ListItem
-          text="Vender entradas"
-          icon={<ShoppingCartIcon />}
-          url="/tickets/sell"
-        />
-        <Divider sx={{ my: 1 }} />
-        <ListSubheader component="div" inset>
-          Configuraciones
-        </ListSubheader>
-        <ListItem
-          text="Entradas"
-          icon={<LocalActivityIcon />}
-          url="/tickets/types/add"
-        />
+        <ListItem text="Perfil" icon={<PersonIcon />} url="/profile/:id" />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
+        <ListItem
+          text="Planes"
+          icon={<LocalActivityIcon />}
+          url="/subscriptions/add"
+        />
         <ListItem
           text="Medios de pago"
           icon={<PaymentIcon />}
           url="/payment-methods"
         />
-        <ListItem text="Promociones" icon={<DiscountIcon />} url="/offers" />
+        <ListItem
+          text="Configuración"
+          icon={<SettingsIcon />}
+          url="/settings"
+        />
       </List>
     </Drawer>
   );

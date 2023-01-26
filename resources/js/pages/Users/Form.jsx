@@ -12,8 +12,27 @@ import { useGetUser } from '@/hooks/users/useGetUser';
 import { useGetRoles } from '@/hooks/users/useGetRoles';
 import { Box } from '@/components/common/Box';
 import { Select } from '@/components/common/Inputs/Select';
-import { TextField } from '@/components/common/Inputs/TextField';
 import { useGetCompanies } from '@/hooks/companies/useGetCompanies';
+import { RoleEnum } from '@/enums/RoleEnum';
+import { CustomerForm } from '@/pages/Users/Forms/CustomerForm';
+import { ProfessorForm } from '@/pages/Users/Forms/ProfessorForm';
+import { CashierForm } from '@/pages/Users/Forms/CashierForm';
+import { AdminForm } from '@/pages/Users/Forms/AdminForm';
+
+function mapRoleToForm(role, control) {
+  switch (role) {
+  case RoleEnum.CUSTOMER:
+    return <CustomerForm control={control} />;
+  case RoleEnum.ADMIN:
+    return <AdminForm control={control} />;
+  case RoleEnum.PROFESSOR:
+    return <ProfessorForm control={control} />;
+  case RoleEnum.CASHIER:
+    return <CashierForm control={control} />;
+  default:
+    return null;
+  }
+}
 
 export const UserForm = () => {
   const { data: companies } = useGetCompanies();
@@ -21,12 +40,13 @@ export const UserForm = () => {
   const existingUser = useGetUser(userId);
   const navigate = useNavigate();
   const roles = useGetRoles();
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, control, reset, watch } = useForm({
     defaultValues: existingUser,
   });
   const { mutate, isLoading } = useMutation(
     userId ? UsersApi.update : UsersApi.create
   );
+  const roleId = watch('role_id');
 
   useEffect(() => {
     if (existingUser) {
@@ -59,22 +79,6 @@ export const UserForm = () => {
           <Title>{title}</Title>
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            control={control}
-            name="name"
-            labelText="Nombre"
-            required
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            control={control}
-            name="email"
-            labelText="Correo electrónico"
-            required
-          />
-        </Grid>
-        <Grid item xs={6}>
           <Select
             control={control}
             data={roles}
@@ -83,6 +87,8 @@ export const UserForm = () => {
             required
           />
         </Grid>
+        <Grid item xs={6} />
+        {mapRoleToForm(roleId, control)}
         {companies?.length > 0 && (
           <Grid item xs={6}>
             <Select

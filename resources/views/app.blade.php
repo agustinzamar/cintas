@@ -15,16 +15,10 @@
         }
     </style>
 
-    <!-- Mercado Pago -->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-
     @vitereactrefresh()
     @vite('resources/js/app.jsx')
 </head>
 <body class="antialiased">
 <div id="app"></div>
-<script>
-    const mp = new MercadoPago("{{config('services.mercadopago.public_key')}}");
-</script>
 </body>
 </html>

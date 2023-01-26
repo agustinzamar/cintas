@@ -27,7 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UsersController::class);
     Route::post('users/{user}', [UsersController::class, 'enable']);
     Route::apiResource('roles', RolesController::class);
-    Route::apiResource('ticket-types', TicketTypeController::class);
 
     Route::middleware('auth.superadmin')->group(function () {
         Route::apiResource('companies', CompaniesController::class);
