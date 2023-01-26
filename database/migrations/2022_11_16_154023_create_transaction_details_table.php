@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_type_id')->references('id')->on('ticket_types');
+            $table->morphs('saleable');
             $table->foreignId('transaction_id')->references('id')->on('transactions');
             $table->float('price');
             $table->float('quantity');

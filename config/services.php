@@ -24,10 +24,4 @@ return [
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
-
-    'mercadopago' => [
-        'public_key' => env('MERCADOPAGO_PUBLIC_KEY', 'xxxxx'),
-        'access_token' => env('MERCADOPAGO_ACCESS_TOKEN', 'xxxxx'),
-    ],
-
 ];

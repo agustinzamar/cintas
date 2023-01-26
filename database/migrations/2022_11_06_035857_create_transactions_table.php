@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->morphs('payment_method');
-            $table->integer('placed_via');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('company_id')->references('id')->on('companies');
+            $table->string('description')->nullable();
+            $table->foreignId('payment_method_id')->references('id')->on('payment_methods');
+            $table->foreignId('buyer_id')->references('id')->on('users');
+            $table->foreignId('seller_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

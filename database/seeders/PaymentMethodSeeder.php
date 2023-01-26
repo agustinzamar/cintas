@@ -18,7 +18,7 @@ class PaymentMethodSeeder extends Seeder
         PaymentMethod::insert([
             ['name' => 'Efectivo'],
             ['name' => 'Transferencia'],
-            ['name' => 'MercadoPago'],
+            ['name' => 'Tarjeta'],
         ]);
     }
 }

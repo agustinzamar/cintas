@@ -15,6 +15,8 @@ return new class extends Migration {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
+            $table->foreignId('company_id')->nullable()->references('id')->on('companies');
             $table->timestamps();
         });
     }
