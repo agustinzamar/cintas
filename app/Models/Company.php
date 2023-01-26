@@ -9,14 +9,15 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     public function users()
     {
         return $this->hasMany(User::class);
-    }
-
-    public function ticketTypes()
-    {
-        return $this->hasMany(TicketType::class);
     }
 
     public function paymentMethods()

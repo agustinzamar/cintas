@@ -7,15 +7,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TicketType extends Model
+class Subscription extends Model
 {
-    use HasFactory, SoftDeletes, Multitenantable;
+    use HasFactory;
+    use SoftDeletes;
+    use Multitenantable;
 
     protected $with = ['company'];
 
-    protected $fillable = ['name', 'price', 'is_public'];
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'company_id',
+    ];
 
-    protected $hidden = ['company_id'];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'company_id'
+    ];
 
     public function company()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,9 @@ class RegisterRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        /* @var User $user*/
-        $user = Auth::user();
-        $roleId = $user->role?->id;
-
-        return in_array($roleId, [1, 2]);
+        return true;
     }
 
     /**
@@ -27,13 +24,14 @@ class RegisterRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['string', 'required', 'max:100'],
             'email' => ['string', 'required', 'max:100', 'email', 'unique:users,email'],
             'password' => ['string', 'required', 'confirmed', 'min:8'],
             'role_id' => ['numeric', 'required', 'exists:roles,id'],
+            'company_id' => ['nullable', 'numeric', 'exists:companies,id'],
         ];
     }
 }

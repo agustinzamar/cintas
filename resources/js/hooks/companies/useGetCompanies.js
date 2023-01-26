@@ -9,7 +9,7 @@ export const useGetCompanies = () => {
 
   useEffect(() => {
     if (isSuperAdmin) query.refetch();
-  }, []);
+  }, [isSuperAdmin]);
 
   return query;
 };

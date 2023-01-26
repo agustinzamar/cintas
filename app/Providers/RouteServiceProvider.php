@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -41,6 +42,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->bind('user', function ($user) {
             return User::withTrashed()->where('id', $user)->firstOrFail();
         });
+        $this->bind('subscription', function ($subscription) {
+            return Subscription::withTrashed()->where('id', $subscription)->firstOrFail();
+        });
+
     }
 
     /**

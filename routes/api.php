@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TicketTypeController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UsersController::class);
     Route::post('users/{user}', [UsersController::class, 'enable']);
     Route::apiResource('roles', RolesController::class);
+    Route::apiResource('subscriptions', SubscriptionsController::class);
+    Route::post('subscriptions/{subscription}/restore', [SubscriptionsController::class, 'restore']);
 
     Route::middleware('auth.superadmin')->group(function () {
         Route::apiResource('companies', CompaniesController::class);

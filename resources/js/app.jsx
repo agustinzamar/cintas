@@ -16,11 +16,11 @@ import { LoginPage } from '@/pages/Login';
 import { Index as AuthenticatedLayout } from '@/layouts/Authenticated';
 import { Index as GuestLayout } from '@/layouts/Guest';
 import { Dashboard } from '@/pages/Dashboard';
-import { SellTickets } from '@/pages/Tickets/Sell';
 import { UsersList } from '@/pages/Users/List';
 import { UserForm } from '@/pages/Users/Form';
-import { TicketsPage } from '@/pages/Tickets/TicketsPage';
 import { PaymentMethodsList } from '@/pages/PaymentMethods/List';
+import { AddSubscription } from '@/pages/Subscriptions/Add';
+import { SubscriptionsList } from '@/pages/Subscriptions/List';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -72,11 +72,9 @@ function App() {
                 <Route element={<AuthMiddleware />}>
                   <Route element={<AuthenticatedLayout />}>
                     <Route exact path="" element={<Dashboard />} />
-                    <Route path="tickets">
-                      <Route exact path="sell" element={<SellTickets />} />
-                      <Route path="types">
-                        <Route exact path="add" element={<TicketsPage />} />
-                      </Route>
+                    <Route path="subscriptions">
+                      <Route exact path="" element={<SubscriptionsList />} />
+                      <Route exact path="add" element={<AddSubscription />} />
                     </Route>
 
                     <Route path="users">

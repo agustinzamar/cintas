@@ -62,7 +62,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
         <ListItem
           text="Planes"
           icon={<LocalActivityIcon />}
-          url="/subscriptions/add"
+          url="/subscriptions"
         />
         <ListItem
           text="Medios de pago"

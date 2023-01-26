@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         if (config('app.env') === 'local') {
             $this->call([
                 CompanySeeder::class,
+                SubscriptionsSeeder::class,
             ]);
         }
     }
