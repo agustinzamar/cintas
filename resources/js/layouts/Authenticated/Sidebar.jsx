@@ -60,7 +60,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
         <ListItem text="Perfil" icon={<PersonIcon />} url="/profile/:id" />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
         <ListItem
-          text="Planes"
+          text="Planes y clases"
           icon={<LocalActivityIcon />}
           url="/subscriptions"
         />
@@ -69,6 +69,15 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
           icon={<PaymentIcon />}
           url="/payment-methods"
         />
+        <ListItem
+          text="Rutinas de ejercicio"
+          icon={<SettingsIcon />}
+          url="/settings"
+        />
+        <ListItem text="Alimentación" icon={<SettingsIcon />} url="/settings" />
+        <ListItem text="Productos" icon={<SettingsIcon />} url="/settings" />
+        <ListItem text="Asistencia" icon={<SettingsIcon />} url="/settings" />
+        <ListItem text="Vender" icon={<SettingsIcon />} url="/settings" />
         <ListItem
           text="Configuración"
           icon={<SettingsIcon />}
