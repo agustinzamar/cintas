@@ -19,8 +19,8 @@ import { Dashboard } from '@/pages/Dashboard';
 import { UsersList } from '@/pages/Users/List';
 import { UserForm } from '@/pages/Users/Form';
 import { PaymentMethodsList } from '@/pages/PaymentMethods/List';
-import { AddSubscription } from '@/pages/Subscriptions/Add';
 import { SubscriptionsList } from '@/pages/Subscriptions/List';
+import { SubscriptionForm } from '@/pages/Subscriptions/Form';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -74,7 +74,12 @@ function App() {
                     <Route exact path="" element={<Dashboard />} />
                     <Route path="subscriptions">
                       <Route exact path="" element={<SubscriptionsList />} />
-                      <Route exact path="add" element={<AddSubscription />} />
+                      <Route exact path="add" element={<SubscriptionForm />}>
+                        <Route
+                          path=":subscriptionId"
+                          element={<SubscriptionForm />}
+                        />
+                      </Route>
                     </Route>
 
                     <Route path="users">

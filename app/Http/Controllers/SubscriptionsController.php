@@ -23,6 +23,12 @@ class SubscriptionsController extends Controller
         return new JsonResponse($subscription, Response::HTTP_CREATED);
     }
 
+    public function show(Subscription $subscription): JsonResponse
+    {
+        $subscription->load('company');
+        return new JsonResponse($subscription, Response::HTTP_OK);
+    }
+
     public function update(Subscription $subscription, UpdateSubscriptionRequest $request): JsonResponse
     {
         $validated = $request->validated();
