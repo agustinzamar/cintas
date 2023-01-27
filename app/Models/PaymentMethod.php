@@ -10,8 +10,6 @@ class PaymentMethod extends Model
     use HasFactory;
 
     protected $hidden = [
-        'extra_cost_is_percentage',
-        'extra_cost',
         'pivot',
         'created_at',
         'updated_at',
