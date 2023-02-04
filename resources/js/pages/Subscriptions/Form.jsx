@@ -28,7 +28,10 @@ export const SubscriptionForm = () => {
 
   useEffect(() => {
     if (existingSubscription) {
-      reset(existingSubscription);
+      reset({
+        ...existingSubscription,
+        company_id: existingSubscription.company.id,
+      });
     }
   }, [existingSubscription]);
 
