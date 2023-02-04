@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -18,6 +17,7 @@ class UserSeeder extends Seeder
         //create the superadmin
         $user = User::create([
             'name' => 'SuperAdmin',
+            'dni' => '00000000',
             'email' => config('auth.superadmin.email'),
             'password' => config('auth.superadmin.password'),
             'role_id' => 1,

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company;
+use App\Models\DiseaseType;
 use Illuminate\Database\Seeder;
 
-class CompanySeeder extends Seeder
+class DiseaseTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,16 +14,16 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        Company::insert([
+        DiseaseType::insert([
             [
-                'name' => 'SuperGym',
+                'name' => 'Alergia'
             ],
             [
-                'name' => 'SmartFit',
+                'name' => 'Enfermedad crónica'
             ],
             [
-                'name' => 'Gym4All',
-            ],
+                'name' => 'Lesión'
+            ]
         ]);
     }
 }

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PaymentMethodSeeder::class,
             SettingsSeeder::class,
+            DiseaseTypesSeeder::class,
         ]);
 
         if (config('app.env') === 'local') {
