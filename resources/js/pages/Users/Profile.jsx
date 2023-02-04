@@ -7,46 +7,44 @@ import { useForm } from 'react-hook-form';
 import { mapRoleToForm } from '../../utils/users';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import UsersApi from '@/api/UsersApi';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import { TextField } from '@/components/common/Inputs/TextField';
+import { RoleEnum } from '@/enums/RoleEnum';
+import { CustomerAdditionalForms } from '@/pages/Users/Forms/CustomerAdditionalForms';
 
 export const Profile = () => {
   const { auth: user } = useAuth();
-  const [isEditing, setIsEditing] = useState(false);
-  const { control, handleSubmit, reset } = useForm();
+  const [isEditingPersonal, setIsEditingPersonal] = useState(false);
+  const {
+    control: controlPersonal,
+    handleSubmit: handleSubmitPersonal,
+    reset: resetPersonal,
+  } = useForm();
   const { mutate, isLoading } = useMutation(UsersApi.update);
 
   useEffect(() => {
     if (user) {
-      reset({
+      resetPersonal({
         ...user,
         role_id: user.role?.id,
       });
     }
   }, [user]);
 
-  const toggleEdit = () => setIsEditing(!isEditing);
-
-  const cancelEditing = () => {
-    reset(user);
-    toggleEdit();
+  const toggleEditPersonal = () => setIsEditingPersonal(!isEditingPersonal);
+  const cancelEditingPersonal = () => {
+    resetPersonal(user);
+    toggleEditPersonal();
   };
 
-  const onSubmit = data => {
+  const onSubmitPersonalData = data => {
     mutate(data, {
       onSuccess: () => {
         toast.success('Perfil actualizado exitosamente');
-        toggleEdit();
+        toggleEditPersonal();
       },
       onError: () => toast.error('Lo sentimos, algo salió mal'),
     });
@@ -56,7 +54,7 @@ export const Profile = () => {
     <>
       <Box
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmitPersonal(onSubmitPersonalData)}
         isLoading={isLoading}
       >
         <Grid container spacing={2}>
@@ -64,8 +62,8 @@ export const Profile = () => {
             <Title>Datos Personales</Title>
           </Grid>
           <Grid item xs={1}>
-            {!isEditing && (
-              <IconButton onClick={toggleEdit}>
+            {!isEditingPersonal && (
+              <IconButton onClick={toggleEditPersonal}>
                 <EditIcon />
               </IconButton>
             )}
@@ -76,13 +74,13 @@ export const Profile = () => {
               )
             </SubTitle>
           </Grid>
-          {mapRoleToForm(user.role.id, control, !isEditing)}
-          {isEditing && (
+          {mapRoleToForm(user.role.id, controlPersonal, !isEditingPersonal)}
+          {isEditingPersonal && (
             <Grid item xs={12}>
               <Button
                 variant="outlined"
                 sx={{ marginRight: '1rem' }}
-                onClick={cancelEditing}
+                onClick={cancelEditingPersonal}
               >
                 Cancelar
               </Button>
@@ -94,105 +92,7 @@ export const Profile = () => {
         </Grid>
       </Box>
 
-      <Box style={{ marginTop: '2rem' }}>
-        <Grid container spacing={2}>
-          <Grid item xs={11}>
-            <Title>Alergias y patologias</Title>
-          </Grid>
-          <Grid item xs={1}>
-            <IconButton>
-              <AddCircleIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={12}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>#</TableCell>
-                  <TableCell>Tipo</TableCell>
-                  <TableCell>Descripción</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell colSpan={3} align="center">
-                    No hay alergias o patologías registradas
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Box style={{ marginTop: '2rem' }}>
-        <Grid container spacing={2}>
-          <Grid item xs={11}>
-            <Title>Contacto de emergencia</Title>
-          </Grid>
-          <Grid item xs={1}>
-            {!isEditing && (
-              <IconButton onClick={toggleEdit}>
-                <EditIcon />
-              </IconButton>
-            )}
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              control={control}
-              name="name"
-              labelText="Nombre completo"
-              required
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              control={control}
-              name="relationship"
-              labelText="Parentezco"
-              required
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              control={control}
-              name="phone"
-              labelText="Teléfono"
-              required
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              control={control}
-              name="email"
-              labelText="Email"
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              control={control}
-              name="address"
-              labelText="Dirección"
-              required
-            />
-          </Grid>
-          {isEditing && (
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
-                sx={{ marginRight: '1rem' }}
-                onClick={cancelEditing}
-              >
-                Cancelar
-              </Button>
-              <Button variant="contained" type="submit">
-                Guardar
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
+      {user.role.id === RoleEnum.CUSTOMER && <CustomerAdditionalForms />}
     </>
   );
 };

@@ -39,6 +39,14 @@ export const CustomerForm = ({ control, readonly }) => {
           disabled={readonly}
         />
       </Grid>
+      <Grid item xs={4}>
+        <TextField
+          control={control}
+          name="blood_type"
+          labelText="Factor sanguíneo"
+          disabled={readonly}
+        />
+      </Grid>
     </>
   );
 };
