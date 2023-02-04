@@ -50,7 +50,11 @@ export const UserForm = () => {
 
   useEffect(() => {
     if (existingUser) {
-      reset(existingUser);
+      reset({
+        ...existingUser,
+        role_id: existingUser.role?.id,
+        company_id: existingUser.company?.id,
+      });
     }
   }, [existingUser]);
 
