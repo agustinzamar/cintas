@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import { TextField } from '@/components/common/Inputs/TextField';
 
-export const CashierForm = ({ control }) => {
+export const CashierForm = ({ control, readonly }) => {
   return (
     <>
       <Grid item xs={6}>
@@ -10,10 +10,17 @@ export const CashierForm = ({ control }) => {
           name="name"
           labelText="Nombre completo"
           required
+          disabled={readonly}
         />
       </Grid>
       <Grid item xs={6}>
-        <TextField control={control} name="dni" labelText="DNI" required />
+        <TextField
+          control={control}
+          name="dni"
+          labelText="DNI"
+          required
+          disabled={readonly}
+        />
       </Grid>
       <Grid item xs={6}>
         <TextField
@@ -21,16 +28,23 @@ export const CashierForm = ({ control }) => {
           name="email"
           labelText="Correo electrónico"
           required
+          disabled={readonly}
         />
       </Grid>
       <Grid item xs={6}>
-        <TextField control={control} name="phone" labelText="Teléfono" />
+        <TextField
+          control={control}
+          name="phone"
+          labelText="Teléfono"
+          disabled={readonly}
+        />
       </Grid>
       <Grid item xs={6}>
         <TextField
           control={control}
           name="salary"
           labelText="Salario por hora"
+          disabled={readonly}
         />
       </Grid>
     </>

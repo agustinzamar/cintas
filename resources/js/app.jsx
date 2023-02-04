@@ -1,7 +1,7 @@
 import './bootstrap';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider } from '@/context/AuthProvider';
 import { AuthMiddleware } from '@/routes/AuthMiddleware';
@@ -21,6 +21,7 @@ import { UserForm } from '@/pages/Users/Form';
 import { PaymentMethodsList } from '@/pages/PaymentMethods/List';
 import { SubscriptionsList } from '@/pages/Subscriptions/List';
 import { SubscriptionForm } from '@/pages/Subscriptions/Form';
+import { Profile } from '@/pages/Users/Profile';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -87,6 +88,9 @@ function App() {
                       <Route path="add" element={<UserForm />}>
                         <Route path=":userId" element={<UserForm />} />
                       </Route>
+                    </Route>
+                    <Route path="profile" element={<Profile />}>
+                      <Route path=":id" element={<Profile />} />
                     </Route>
 
                     <Route path="payment-methods">

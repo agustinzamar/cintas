@@ -57,7 +57,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       <Divider />
       <List component="nav">
         <ListItem text="Inicio" icon={<DashboardIcon />} url="/" />
-        <ListItem text="Perfil" icon={<PersonIcon />} url="/profile/:id" />
+        <ListItem text="Perfil" icon={<PersonIcon />} url="/profile" />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
         <ListItem
           text="Planes y clases"
