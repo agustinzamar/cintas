@@ -23,6 +23,11 @@
 7. `./vendor/bin/sail npm run dev` to start the vite compiler
 8. Access to `http://localhost` on the browser to see the system
 
+## Development
+
+1. Run `./vendor/bin/sail up -d` to start the docker container
+2. Run `./vendor/bin/sail npm run dev` to build react
+
 ## Optional
 
 - [Create an alias for sail](https://laravel.com/docs/9.x/sail#configuring-a-shell-alias)
