@@ -9,13 +9,13 @@ import { useEffect } from 'react';
 import { Loader } from '@/components/common/Loader';
 import { Box } from '@/components/common/Box';
 import { Select } from '@/components/common/Inputs/Select';
-import { useGetCompanies } from '@/hooks/companies/useGetCompanies';
+import { useGetHeadquarters } from '@/hooks/companies/useGetHeadquarters';
 import SubscriptionsApi from '@/api/SubscriptionsApi';
 import { TextField } from '@/components/common/Inputs/TextField';
 import { useGetSubscription } from '@/hooks/subscriptions/useGetSubscription';
 
 export const SubscriptionForm = () => {
-  const { data: companies } = useGetCompanies();
+  const { data: companies } = useGetHeadquarters();
   const { subscriptionId } = useParams();
   const existingSubscription = useGetSubscription(subscriptionId);
   const navigate = useNavigate();

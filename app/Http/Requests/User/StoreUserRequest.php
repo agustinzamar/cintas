@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -26,8 +28,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:100'],
             'email' => ['string', 'required', 'max:100', 'email', 'unique:users,email'],
-            'role_id' => ['numeric', 'required', 'exists:roles,id'],
-            'company_id' => ['numeric', 'nullable', 'exists:companies,id'],
+            'role_id' => ['numeric', 'required', 'exists:roles,id', Rule::notIn([RoleEnum::SUPERADMIN])], // Do not allow to create superadmins via API
+            'company_id' => ['numeric', 'exists:companies,id', Rule::requiredIf(auth()->user()->company?->id === null)]
         ];
     }
 }

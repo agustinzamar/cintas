@@ -21,23 +21,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
+    // ---- [ Auth ] ----
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/me', [AuthController::class, 'me'])->name('auth.me');
 
+    // ---- [ Companies ] ----
+    Route::apiResource('companies', CompaniesController::class);
+    Route::post('companies/{company}/restore', [CompaniesController::class, 'restore']);
+
+    // ---- [ Users ] ----
     Route::apiResource('users', UsersController::class);
     Route::post('users/{user}', [UsersController::class, 'enable']);
+
+    // ---- [ Roles ] ----
     Route::apiResource('roles', RolesController::class);
+
+    // ---- [ Subscriptions ] ----
     Route::apiResource('subscriptions', SubscriptionsController::class);
     Route::post('subscriptions/{subscription}/restore', [SubscriptionsController::class, 'restore']);
 
-    Route::middleware('auth.superadmin')->group(function () {
-        Route::apiResource('companies', CompaniesController::class);
-    });
-
+    // ---- [ Payment Methods ] ----
     //TODO: wrap in admin middleware
     Route::apiResource('payment-methods', PaymentMethodsController::class);
     Route::get('/payment-methods-allowed', [PaymentMethodsController::class, 'showByCompany']);
+
+    // Actions only allowed to the superadmin
+    Route::middleware('auth.superadmin')->group(function () {
+    });
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');

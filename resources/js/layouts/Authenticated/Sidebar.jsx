@@ -12,6 +12,7 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
+import StoreIcon from '@mui/icons-material/Store';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
@@ -59,6 +60,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
         <ListItem text="Inicio" icon={<DashboardIcon />} url="/" />
         <ListItem text="Perfil" icon={<PersonIcon />} url="/profile" />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
+        <ListItem text="Sucursales" icon={<StoreIcon />} url="/branchs" />
         <ListItem
           text="Planes y clases"
           icon={<LocalActivityIcon />}

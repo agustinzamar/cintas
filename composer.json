@@ -9,6 +9,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.0.2",
+    "dyrynda/laravel-cascade-soft-deletes": "^4.2",
     "edrmtz01/laravel-jet-spanish": "^1.0",
     "friendsofphp/php-cs-fixer": "^3.13",
     "guzzlehttp/guzzle": "^7.2",

@@ -4,49 +4,45 @@ import Title from '@/components/common/Title';
 import Button from '@mui/material/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
-import UsersApi from '@/api/UsersApi';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { Loader } from '@/components/common/Loader';
-import { useGetUser } from '@/hooks/users/useGetUser';
-import { useGetRoles } from '@/hooks/users/useGetRoles';
 import { Box } from '@/components/common/Box';
 import { Select } from '@/components/common/Inputs/Select';
 import { useGetHeadquarters } from '@/hooks/companies/useGetHeadquarters';
-import { mapRoleToForm } from '../../utils/users';
+import { TextField } from '@/components/common/Inputs/TextField';
+import CompaniesApi from '@/api/CompaniesApi';
+import { useGetCompany } from '@/hooks/companies/useGetCompany';
 
-export const UserForm = () => {
+export const BranchForm = () => {
   const { data: companies } = useGetHeadquarters();
-  const { userId } = useParams();
-  const existingUser = useGetUser(userId);
+  const { companyId } = useParams();
+  const existingCompany = useGetCompany(companyId);
   const navigate = useNavigate();
-  const roles = useGetRoles();
-  const { handleSubmit, control, reset, watch } = useForm({
-    defaultValues: existingUser,
+  const { handleSubmit, control, reset } = useForm({
+    defaultValues: existingCompany,
   });
   const { mutate, isLoading } = useMutation(
-    userId ? UsersApi.update : UsersApi.create
+    companyId ? CompaniesApi.update : CompaniesApi.create
   );
-  const roleId = watch('role_id');
 
   useEffect(() => {
-    if (existingUser) {
+    if (existingCompany) {
       reset({
-        ...existingUser,
-        role_id: existingUser.role?.id,
-        company_id: existingUser.company?.id,
+        ...existingCompany,
+        company_id: existingCompany.headquarters.id || null,
       });
     }
-  }, [existingUser]);
+  }, [existingCompany]);
 
   const onSubmit = data => {
-    data.id = userId;
+    data.id = companyId;
     mutate(data, {
       onSuccess: () => {
         toast.success(
-          `Usuario ${userId ? 'actualizado' : 'creado'} exitosamente`
+          `Sucursal ${companyId ? 'actualizada' : 'creada'} exitosamente`
         );
-        if (!userId) {
+        if (!companyId) {
           navigate(-1);
         }
       },
@@ -54,7 +50,7 @@ export const UserForm = () => {
     });
   };
 
-  const title = `${existingUser ? 'Modificar' : 'Crear'} usuario`;
+  const title = `${existingCompany ? 'Modificar' : 'Crear'} sucursal`;
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -64,16 +60,20 @@ export const UserForm = () => {
           <Title>{title}</Title>
         </Grid>
         <Grid item xs={6}>
-          <Select
+          <TextField
             control={control}
-            data={roles}
-            name="role_id"
-            labelText="Rol"
+            labelText="Nombre de la sucursal"
+            name="name"
             required
           />
         </Grid>
-        <Grid item xs={6} />
-        {mapRoleToForm(roleId, control)}
+        <Grid item xs={12}>
+          <TextField
+            control={control}
+            labelText="Descripción"
+            name="description"
+          />
+        </Grid>
         {companies?.length > 0 && (
           <Grid item xs={6}>
             <Select
@@ -81,7 +81,6 @@ export const UserForm = () => {
               data={companies}
               name="company_id"
               labelText="Empresa"
-              required
             />
           </Grid>
         )}

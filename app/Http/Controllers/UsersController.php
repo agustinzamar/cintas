@@ -51,9 +51,7 @@ class UsersController extends Controller
 
     public function enable(User $user): JsonResponse
     {
-        $user->deleted_at = null;
-        $user->update();
-
+        $user->restore();
         return new JsonResponse($user, Response::HTTP_OK);
     }
 }

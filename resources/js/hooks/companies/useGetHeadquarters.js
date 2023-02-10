@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import CompaniesApi from '@/api/CompaniesApi';
 import { useEffect } from 'react';
 
-export const useGetCompanies = () => {
+export const useGetHeadquarters = () => {
   const isSuperAdmin = useIsSuperAdmin();
   const query = useQuery(['companies'], CompaniesApi.get, { enabled: false });
 
@@ -11,5 +11,10 @@ export const useGetCompanies = () => {
     if (isSuperAdmin) query.refetch();
   }, [isSuperAdmin]);
 
-  return query;
+  return {
+    ...query,
+    data: query.data?.filter(
+      company => company.company === null && company.deleted_at === null
+    ),
+  };
 };

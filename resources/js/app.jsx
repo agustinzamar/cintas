@@ -22,6 +22,8 @@ import { PaymentMethodsList } from '@/pages/PaymentMethods/List';
 import { SubscriptionsList } from '@/pages/Subscriptions/List';
 import { SubscriptionForm } from '@/pages/Subscriptions/Form';
 import { Profile } from '@/pages/Users/Profile';
+import { BranchsList } from '@/pages/Branch/List';
+import { BranchForm } from '@/pages/Branch/Form';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -95,6 +97,13 @@ function App() {
 
                     <Route path="payment-methods">
                       <Route path="" element={<PaymentMethodsList />} />
+                    </Route>
+
+                    <Route path="branchs">
+                      <Route path="" element={<BranchsList />} />
+                      <Route path="add" element={<BranchForm />}>
+                        <Route path=":companyId" element={<BranchForm />} />
+                      </Route>
                     </Route>
                   </Route>
                 </Route>
