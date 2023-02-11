@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Setting;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
@@ -25,7 +24,7 @@ class SettingsSeeder extends Seeder
                 'name' => 'stock_control_enabled',
                 'label' => 'Habilitar el control de stock',
                 'description' => 'Habilita o deshabilita el control de stock',
-            ]
+            ],
         ];
 
         Setting::insert($settings);

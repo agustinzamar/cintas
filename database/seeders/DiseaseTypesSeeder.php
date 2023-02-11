@@ -16,14 +16,14 @@ class DiseaseTypesSeeder extends Seeder
     {
         DiseaseType::insert([
             [
-                'name' => 'Alergia'
+                'name' => 'Alergia',
             ],
             [
-                'name' => 'Enfermedad crónica'
+                'name' => 'Enfermedad crónica',
             ],
             [
-                'name' => 'Lesión'
-            ]
+                'name' => 'Lesión',
+            ],
         ]);
     }
 }

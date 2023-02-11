@@ -5,7 +5,6 @@ use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SubscriptionsController;
-use App\Http\Controllers\TicketTypeController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 

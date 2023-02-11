@@ -25,7 +25,7 @@ class Subscription extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'company_id'
+        'company_id',
     ];
 
     public function company()

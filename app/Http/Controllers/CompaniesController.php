@@ -23,6 +23,7 @@ class CompaniesController extends Controller
     {
         $validated = $request->validated();
         $company = Company::create($validated);
+
         return new JsonResponse($company, Response::HTTP_CREATED);
     }
 
@@ -30,6 +31,7 @@ class CompaniesController extends Controller
     {
         $validated = $request->validated();
         $company->update($validated);
+
         return new JsonResponse($company, Response::HTTP_OK);
     }
 
@@ -46,6 +48,7 @@ class CompaniesController extends Controller
         }
 
         $company->delete();
+
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
@@ -57,6 +60,7 @@ class CompaniesController extends Controller
         }
 
         $company->restore();
+
         return new JsonResponse($company, Response::HTTP_OK);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentMethods\StorePaymentMethodsRequest;
 use App\Models\PaymentMethod;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PaymentMethodsController extends Controller

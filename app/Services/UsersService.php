@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Mail\UserCreatedEmail;
 use App\Models\User;
-use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 
 class UsersService

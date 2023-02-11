@@ -27,9 +27,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required', 'max:100'],
-            'email' => ['string', 'required', 'max:100', 'email', 'unique:users,email,' . $this->user->id],
+            'email' => ['string', 'required', 'max:100', 'email', 'unique:users,email,'.$this->user->id],
             'role_id' => ['numeric', 'required', 'exists:roles,id', Rule::notIn([RoleEnum::SUPERADMIN])], // Do not allow creating superadmins via API
-            'company_id' => ['numeric', 'exists:companies,id', Rule::requiredIf(auth()->user()->company?->id === null)]
+            'company_id' => ['numeric', 'exists:companies,id', Rule::requiredIf(auth()->user()->company?->id === null)],
         ];
     }
 }

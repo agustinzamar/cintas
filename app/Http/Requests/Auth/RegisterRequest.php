@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class RegisterRequest extends FormRequest
 {

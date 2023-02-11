@@ -20,12 +20,14 @@ class SubscriptionsController extends Controller
         $validated = $request->validated();
         $subscription = Subscription::create($validated);
         $subscription->load('company');
+
         return new JsonResponse($subscription, Response::HTTP_CREATED);
     }
 
     public function show(Subscription $subscription): JsonResponse
     {
         $subscription->load('company');
+
         return new JsonResponse($subscription, Response::HTTP_OK);
     }
 
@@ -34,6 +36,7 @@ class SubscriptionsController extends Controller
         $validated = $request->validated();
         $subscription->update($validated);
         $subscription->load('company');
+
         return new JsonResponse($subscription, Response::HTTP_CREATED);
     }
 
@@ -45,6 +48,7 @@ class SubscriptionsController extends Controller
 //        }
 
         $subscription->delete();
+
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
@@ -52,6 +56,7 @@ class SubscriptionsController extends Controller
     {
         $subscription->restore();
         $subscription->load('company');
+
         return new JsonResponse($subscription, Response::HTTP_OK);
     }
 }

@@ -13,7 +13,7 @@ class RolesController extends Controller
     {
         $role_id = auth()->user()->role_id;
 
-        switch ($role_id){
+        switch ($role_id) {
             case RoleEnum::SUPERADMIN:
             case RoleEnum::ADMINISTRATOR:
                 $roles = Role::where('is_public', true)->get();
