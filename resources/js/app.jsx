@@ -24,6 +24,7 @@ import { SubscriptionForm } from '@/pages/Subscriptions/Form';
 import { Profile } from '@/pages/Users/Profile';
 import { BranchsList } from '@/pages/Branch/List';
 import { BranchForm } from '@/pages/Branch/Form';
+import { SettingsIndex } from '@/pages/Settings';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -105,6 +106,12 @@ function App() {
                         <Route path=":companyId" element={<BranchForm />} />
                       </Route>
                     </Route>
+
+                    <Route path="settings">
+                      <Route path="" element={<SettingsIndex />} />
+                    </Route>
+
+                    <Route path="*" element={<h1>404</h1>} />
                   </Route>
                 </Route>
               </Routes>
