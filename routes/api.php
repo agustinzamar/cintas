@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('subscriptions', SubscriptionsController::class);
     Route::post('subscriptions/{subscription}/restore', [SubscriptionsController::class, 'restore']);
 
+
     // ---- [ Payment Methods ] ----
     //TODO: wrap in admin middleware
     Route::apiResource('payment-methods', PaymentMethodsController::class);
