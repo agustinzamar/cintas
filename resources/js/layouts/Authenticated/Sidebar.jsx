@@ -78,8 +78,6 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
         />
         <ListItem text="Alimentación" icon={<SettingsIcon />} url="/settings" />
         <ListItem text="Productos" icon={<SettingsIcon />} url="/settings" />
-        <ListItem text="Asistencia" icon={<SettingsIcon />} url="/settings" />
-        <ListItem text="Vender" icon={<SettingsIcon />} url="/settings" />
         <ListItem
           text="Configuración"
           icon={<SettingsIcon />}

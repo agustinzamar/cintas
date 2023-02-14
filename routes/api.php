@@ -20,8 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-
-
+    
     // ---- [ Auth ] ----
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
