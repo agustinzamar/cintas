@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory;
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'companies_settings')->withPivot(['is_enabled']);
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
     // ---- [ Auth ] ----
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -40,6 +41,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // ---- [ Subscriptions ] ----
     Route::apiResource('subscriptions', SubscriptionsController::class);
     Route::post('subscriptions/{subscription}/restore', [SubscriptionsController::class, 'restore']);
+
+    // --- [ Settings ] ---
+    Route::apiResource('settings', SettingsController::class);
 
     // ---- [ Payment Methods ] ----
     //TODO: wrap in admin middleware

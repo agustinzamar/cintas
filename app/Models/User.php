@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password',
         'role_id',
         'company_id',
+        'phone',
+        'blood_type'
     ];
 
     /**
@@ -53,7 +55,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => bcrypt($value),
+            set: fn($value) => bcrypt($value),
         );
     }
 
@@ -64,6 +66,15 @@ class User extends Authenticatable
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    public function headquarters()
+    {
+        if ($this->company?->isHeadQuarters()) {
+            return $this->company();
+        }
+
+        return $this->company->headquarters() ?? null;
     }
 }

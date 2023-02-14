@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Multitenantable;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +12,8 @@ class Company extends Model
     use HasFactory;
     use SoftDeletes;
     use CascadeSoftDeletes;
-    use MultiTenantable;
+
+//    use MultiTenantable;
 
     protected $with = ['headquarters', 'paymentMethods'];
 
@@ -44,6 +44,13 @@ class Company extends Model
     public function branches()
     {
         return $this->hasMany(Company::class, 'company_id', 'id')->withTrashed();
+    }
+
+    public function settings()
+    {
+        return $this->belongsToMany(Setting::class, 'companies_settings')
+            ->withPivot('is_enabled')
+            ->withTimestamps();
     }
 
     public function paymentMethods()
