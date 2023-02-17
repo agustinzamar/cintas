@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
 use App\Traits\Multitenantable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -76,5 +77,10 @@ class User extends Authenticatable
         }
 
         return $this->company->headquarters() ?? null;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->role_id === RoleEnum::SUPERADMIN;
     }
 }

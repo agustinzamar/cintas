@@ -8,14 +8,12 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { Loader } from '@/components/common/Loader';
 import { Box } from '@/components/common/Box';
-import { Select } from '@/components/common/Inputs/Select';
-import { useGetHeadquarters } from '@/hooks/companies/useGetHeadquarters';
 import { TextField } from '@/components/common/Inputs/TextField';
 import CompaniesApi from '@/api/CompaniesApi';
 import { useGetCompany } from '@/hooks/companies/useGetCompany';
+import { CompaniesDropDown } from '@/components/admin/CompaniesDropDown';
 
 export const BranchForm = () => {
-  const { data: companies } = useGetHeadquarters();
   const { companyId } = useParams();
   const existingCompany = useGetCompany(companyId);
   const navigate = useNavigate();
@@ -74,16 +72,9 @@ export const BranchForm = () => {
             name="description"
           />
         </Grid>
-        {companies?.length > 0 && (
-          <Grid item xs={6}>
-            <Select
-              control={control}
-              data={companies}
-              name="company_id"
-              labelText="Empresa"
-            />
-          </Grid>
-        )}
+        <Grid item xs={6}>
+          <CompaniesDropDown control={control} disabled={!!existingCompany} />
+        </Grid>
         <Grid item xs={12}>
           <Button
             variant="outlined"

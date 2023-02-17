@@ -63,7 +63,7 @@ export const BranchsList = () => {
                 <TableCell>Nombre</TableCell>
                 <TableCell>Descripción</TableCell>
                 <TableCell>Estado</TableCell>
-                {isSuperAdmin && <TableCell>Tipo</TableCell>}
+                <TableCell>Tipo</TableCell>
                 {isSuperAdmin && <TableCell>Empresa</TableCell>}
                 <TableCell align="right">Acciones</TableCell>
               </TableRow>
@@ -77,11 +77,9 @@ export const BranchsList = () => {
                     <TableCell>
                       {branch.deleted_at ? 'Inactivo' : 'Activo'}
                     </TableCell>
-                    {isSuperAdmin && (
-                      <TableCell>
-                        {branch.headquarters ? 'Sucursal' : 'Empresa'}
-                      </TableCell>
-                    )}
+                    <TableCell>
+                      {branch.headquarters ? 'Sucursal' : 'Principal'}
+                    </TableCell>
                     {isSuperAdmin && (
                       <TableCell>{branch.headquarters?.name}</TableCell>
                     )}
@@ -97,8 +95,13 @@ export const BranchsList = () => {
                         />
                       ) : (
                         <DeactivateButton
-                          tooltipText="Desactivar sucursal"
+                          tooltipText={
+                            branch.headquarters
+                              ? 'Desactivar sucursal'
+                              : 'No se puede desactivar la sucursal principal'
+                          }
                           onClick={() => handleDeleteBranch(branch.id)}
+                          disabled={!branch.headquarters}
                         />
                       )}
                     </TableCell>

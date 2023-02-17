@@ -43,7 +43,7 @@ class Company extends Model
 
     public function branches()
     {
-        return $this->hasMany(Company::class, 'company_id', 'id')->withTrashed();
+        return $this->hasMany(Company::class)->withTrashed();
     }
 
     public function settings()

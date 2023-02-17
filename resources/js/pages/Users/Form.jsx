@@ -12,11 +12,10 @@ import { useGetUser } from '@/hooks/users/useGetUser';
 import { useGetRoles } from '@/hooks/users/useGetRoles';
 import { Box } from '@/components/common/Box';
 import { Select } from '@/components/common/Inputs/Select';
-import { useGetHeadquarters } from '@/hooks/companies/useGetHeadquarters';
-import { mapRoleToForm } from '../../utils/users';
+import { mapRoleToForm } from '@/utils/users';
+import { CompaniesDropDown } from '@/components/admin/CompaniesDropDown';
 
 export const UserForm = () => {
-  const { data: companies } = useGetHeadquarters();
   const { userId } = useParams();
   const existingUser = useGetUser(userId);
   const navigate = useNavigate();
@@ -74,17 +73,9 @@ export const UserForm = () => {
         </Grid>
         <Grid item xs={6} />
         {mapRoleToForm(roleId, control)}
-        {companies?.length > 0 && (
-          <Grid item xs={6}>
-            <Select
-              control={control}
-              data={companies}
-              name="company_id"
-              labelText="Empresa"
-              required
-            />
-          </Grid>
-        )}
+        <Grid item xs={6}>
+          <CompaniesDropDown control={control} />
+        </Grid>
         <Grid item xs={12}>
           <Button
             variant="outlined"

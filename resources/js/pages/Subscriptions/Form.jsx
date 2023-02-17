@@ -8,14 +8,12 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { Loader } from '@/components/common/Loader';
 import { Box } from '@/components/common/Box';
-import { Select } from '@/components/common/Inputs/Select';
-import { useGetHeadquarters } from '@/hooks/companies/useGetHeadquarters';
 import SubscriptionsApi from '@/api/SubscriptionsApi';
 import { TextField } from '@/components/common/Inputs/TextField';
 import { useGetSubscription } from '@/hooks/subscriptions/useGetSubscription';
+import { CompaniesDropDown } from '@/components/admin/CompaniesDropDown';
 
 export const SubscriptionForm = () => {
-  const { data: companies } = useGetHeadquarters();
   const { subscriptionId } = useParams();
   const existingSubscription = useGetSubscription(subscriptionId);
   const navigate = useNavigate();
@@ -82,17 +80,9 @@ export const SubscriptionForm = () => {
             name="description"
           />
         </Grid>
-        {companies?.length > 0 && (
-          <Grid item xs={6}>
-            <Select
-              control={control}
-              data={companies}
-              name="company_id"
-              labelText="Empresa"
-              required
-            />
-          </Grid>
-        )}
+        <Grid item xs={6}>
+          <CompaniesDropDown control={control} />
+        </Grid>
         <Grid item xs={12}>
           <Button
             variant="outlined"
