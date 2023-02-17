@@ -3,7 +3,7 @@ import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
 import { Select } from '@/components/common/Inputs/Select';
 import { useEffect, useState } from 'react';
 
-export const CompaniesDropDown = ({ control, required, disabled }) => {
+export const CompaniesDropDown = ({ control, required = true, disabled }) => {
   const isSuperAdmin = useIsSuperAdmin();
   const { data: companies } = useGetAllCompanies();
   const [headquarters, setHeadquarters] = useState([]);
