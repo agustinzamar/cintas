@@ -29,7 +29,7 @@ class User extends Authenticatable
         'role_id',
         'company_id',
         'phone',
-        'blood_type'
+        'dni'
     ];
 
     /**
