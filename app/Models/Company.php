@@ -11,6 +11,8 @@ class Company extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $with = ['city'];
+
     protected $fillable = [
         'name',
         'description',

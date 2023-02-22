@@ -12,14 +12,12 @@ import TableBody from '@mui/material/TableBody';
 import { EditButton } from '@/components/common/IconButtons/EditButton';
 import { ActivateButton } from '@/components/common/IconButtons/ActivateButton';
 import { DeactivateButton } from '@/components/common/IconButtons/DeactivateButton';
-import { useIsSuperAdmin } from '@/hooks/useIsSuperAdmin';
 import { toast } from 'react-toastify';
 import { useQueryClient } from 'react-query';
 import CompaniesApi from '@/api/CompaniesApi';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
 
 export const BranchsList = () => {
-  const isSuperAdmin = useIsSuperAdmin();
   const { data, isLoading } = useGetAllCompanies();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -49,7 +47,7 @@ export const BranchsList = () => {
           variant="contained"
           startIcon={<AddIcon />}
           component={Link}
-          to="/branchs/add"
+          to="/branches/add"
         >
           Nueva sucursal
         </Button>
@@ -61,7 +59,7 @@ export const BranchsList = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Nombre</TableCell>
-                <TableCell>Descripción</TableCell>
+                <TableCell>Ciudad</TableCell>
                 <TableCell>Provincia</TableCell>
                 <TableCell>Dirección</TableCell>
                 <TableCell>Estado</TableCell>
@@ -73,14 +71,16 @@ export const BranchsList = () => {
                 data.map(branch => (
                   <TableRow key={branch.id}>
                     <TableCell>{branch.name}</TableCell>
-                    <TableCell>{branch.description}</TableCell>
+                    <TableCell>{branch.city.name}</TableCell>
+                    <TableCell>{branch.city.province.name}</TableCell>
+                    <TableCell>{branch.address}</TableCell>
                     <TableCell>
                       {branch.deleted_at ? 'Inactivo' : 'Activo'}
                     </TableCell>
                     <TableCell align="right">
                       <EditButton
-                        tooltipText="Editar plan"
-                        onClick={() => navigate(`/branchs/add/${branch.id}`)}
+                        tooltipText="Modificar sucursal"
+                        onClick={() => navigate(`/branches/add/${branch.id}`)}
                       />
                       {branch.deleted_at ? (
                         <ActivateButton
@@ -89,13 +89,8 @@ export const BranchsList = () => {
                         />
                       ) : (
                         <DeactivateButton
-                          tooltipText={
-                            branch.headquarters
-                              ? 'Desactivar sucursal'
-                              : 'No se puede desactivar la sucursal principal'
-                          }
+                          tooltipText="Desactivar sucursal"
                           onClick={() => handleDeleteBranch(branch.id)}
-                          disabled={!branch.headquarters}
                         />
                       )}
                     </TableCell>

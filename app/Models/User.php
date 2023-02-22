@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->role_id === RoleEnum::SUPERADMIN;
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role_id === RoleEnum::ADMINISTRATOR;
+    }
 }

@@ -19,6 +19,7 @@ export const Select = ({
   labelText = '',
   required = false,
   render,
+  disabled = false,
   ...rest
 }) => {
   const labelId = useId();
@@ -42,6 +43,7 @@ export const Select = ({
             inputRef={ref}
             value={value || ''}
             name={name}
+            disabled={disabled}
             {...rest}
           >
             {data.length > 0 && renderFunction(data)}

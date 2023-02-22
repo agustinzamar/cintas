@@ -63,14 +63,8 @@ class CompaniesController extends Controller
             return new JsonResponse('Unauthorized', Response::HTTP_UNAUTHORIZED);
         }
 
-        // Dont delete if is headquarters and it has active branches
-        if ($company->isHeadquarters() && $company->branches()->withoutTrashed()->count() > 0) {
-            return new JsonResponse('Cannot be deleted while there are active branches', Response::HTTP_BAD_REQUEST);
-        }
-
-        // If is a branch update users company_id to headquarters
-        if ($company->isBranch()) {
-            $company->users()->update(['company_id' => $company->company_id]);
+        if (count($company->users) > 0) {
+            return new JsonResponse('Cannot delete branch while has active users.', Response::HTTP_BAD_REQUEST);
         }
 
         $company->delete();
@@ -84,40 +78,20 @@ class CompaniesController extends Controller
             return new JsonResponse('Unauthorized', Response::HTTP_UNAUTHORIZED);
         }
 
-        // If is a branch but it's headquarters is deleted, dont restore it
-        if ($company->isBranch() && $company->headquarters->trashed()) {
-            return new JsonResponse('Cannot be restored while headquarters is deleted', Response::HTTP_BAD_REQUEST);
-        }
-
         $company->restore();
 
         return new JsonResponse($company, Response::HTTP_OK);
-    }
-
-    private function setCompanyHeadquarters(Company $company): void
-    {
-        /** @var User $user */
-        $user = auth()->user();
-        $isSuperAdmin = $user->isSuperAdmin();
-
-        if (!$isSuperAdmin) {
-            $headquartersId = $user->headquarters->id;
-            $company->company_id = $headquartersId;
-            $company->save();
-        }
     }
 
     private function isAllowedToAccessCompany(Company $company): bool
     {
         /** @var User $user */
         $user = auth()->user();
-        $isSuperAdmin = $user->isSuperAdmin();
 
-        if ($isSuperAdmin) {
+        if ($user->isSuperAdmin() || $user->isAdmin()) {
             return true;
         }
 
-        $headquartersId = $user->headquarters->id;
-        return in_array($headquartersId, [$company->id, $company->company_id], true);
+        return $company->id === $user->company->id;
     }
 }

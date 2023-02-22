@@ -11,23 +11,30 @@ import { Box } from '@/components/common/Box';
 import { TextField } from '@/components/common/Inputs/TextField';
 import CompaniesApi from '@/api/CompaniesApi';
 import { useGetCompany } from '@/hooks/companies/useGetCompany';
+import { Select } from '@/components/common/Inputs/Select';
+import { useGetProvinces } from '@/hooks/address/useGetProvinces';
+import { useGetCitiesByProvince } from '@/hooks/address/useGetCitiesByProvince';
 
 export const BranchForm = () => {
   const { companyId } = useParams();
   const existingCompany = useGetCompany(companyId);
   const navigate = useNavigate();
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, control, reset, watch } = useForm({
     defaultValues: existingCompany,
   });
-  const { mutate, isLoading } = useMutation(
+  const { mutate, isLoading: isLoadingMutate } = useMutation(
     companyId ? CompaniesApi.update : CompaniesApi.create
   );
+  const province_id = watch('province_id');
+  const { data: provinces, isLoading: isLoadingProvinces } = useGetProvinces();
+  const { data: cities, isLoading: isLoadingCities } =
+    useGetCitiesByProvince(province_id);
 
   useEffect(() => {
     if (existingCompany) {
       reset({
         ...existingCompany,
-        company_id: existingCompany.headquarters.id || null,
+        province_id: existingCompany.city.province_id,
       });
     }
   }, [existingCompany]);
@@ -48,6 +55,7 @@ export const BranchForm = () => {
   };
 
   const title = `${existingCompany ? 'Modificar' : 'Crear'} sucursal`;
+  const isLoading = isLoadingMutate || isLoadingProvinces || isLoadingCities;
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -63,6 +71,28 @@ export const BranchForm = () => {
             name="name"
             required
           />
+        </Grid>
+        <Grid item xs={6} />
+        <Grid item xs={6}>
+          <Select
+            control={control}
+            labelText="Provincia"
+            name="province_id"
+            data={provinces}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Select
+            control={control}
+            labelText="Ciudad"
+            name="city_id"
+            data={cities}
+            disabled={!province_id}
+            required
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField control={control} labelText="Dirección" name="address" />
         </Grid>
         <Grid item xs={12}>
           <TextField
