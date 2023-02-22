@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PaymentMethodsController;
+use App\Http\Controllers\ProvincesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionsController;
@@ -38,17 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // ---- [ Roles ] ----
     Route::apiResource('roles', RolesController::class);
 
-    // ---- [ Subscriptions ] ----
-    Route::apiResource('subscriptions', SubscriptionsController::class);
-    Route::post('subscriptions/{subscription}/restore', [SubscriptionsController::class, 'restore']);
-
-    // --- [ Settings ] ---
-    Route::apiResource('settings', SettingsController::class);
-
-    // ---- [ Payment Methods ] ----
-    //TODO: wrap in admin middleware
-    Route::apiResource('payment-methods', PaymentMethodsController::class);
-    Route::get('/payment-methods-allowed', [PaymentMethodsController::class, 'showByCompany']);
+    // ---- [ Provinces and Cities ] ----
+    Route::get('provinces', [ProvincesController::class, 'index']);
+    Route::get('cities', [CitiesController::class, 'index']);
+    Route::get('cities/{provinceId}', [CitiesController::class, 'getByProvince']);
 
     // Actions only allowed to the superadmin
     Route::middleware('auth.superadmin')->group(function () {
