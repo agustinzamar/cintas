@@ -26,7 +26,7 @@ class StoreCompanyRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
-            'company_id' => ['nullable', 'integer', 'exists:companies,id'],
+            'city_id' => ['integer', 'exists:cities,id'],
         ];
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('address')->nullable();
+            $table->foreignId('city_id')->references('id')->on('cities');
             $table->timestamps();
             $table->softDeletes();
         });

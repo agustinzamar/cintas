@@ -16,13 +16,17 @@ class CompanySeeder extends Seeder
     {
         Company::insert([
             [
-                'name' => 'SuperGym',
+                'name' => 'Cintas 1',
+                'city_id' => 7330
             ],
             [
-                'name' => 'SmartFit',
+                'name' => 'Cintas 2',
+                'city_id' => 7330
+
             ],
             [
-                'name' => 'Gym4All',
+                'name' => 'Cintas 3',
+                'city_id' => 7330
             ],
         ]);
     }

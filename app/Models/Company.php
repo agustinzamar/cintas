@@ -14,7 +14,8 @@ class Company extends Model
     protected $fillable = [
         'name',
         'description',
-        'company_id',
+        'address',
+        'city_id',
     ];
 
     protected $hidden = [
@@ -26,5 +27,10 @@ class Company extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }
