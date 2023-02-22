@@ -4,14 +4,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { ListItem } from '@/layouts/Authenticated/ListItem';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
 import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import SettingsIcon from '@mui/icons-material/Settings';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
@@ -56,9 +56,9 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       </Toolbar>
       <Divider />
       <List component="nav">
-        <ListItem text="Inicio" icon={<DashboardIcon />} url="/" />
+        <ListItem text="Inicio" icon={<HomeIcon />} url="/" />
         <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/requests" />
-        <ListItem text="Productos" icon={<SettingsIcon />} url="/products" />
+        <ListItem text="Productos" icon={<InventoryIcon />} url="/products" />
         <ListItem
           text="Proveedores"
           icon={<LocalShippingIcon />}
