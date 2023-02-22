@@ -18,13 +18,8 @@ import { Index as GuestLayout } from '@/layouts/Guest';
 import { Dashboard } from '@/pages/Dashboard';
 import { UsersList } from '@/pages/Users/List';
 import { UserForm } from '@/pages/Users/Form';
-import { PaymentMethodsList } from '@/pages/PaymentMethods/List';
-import { SubscriptionsList } from '@/pages/Subscriptions/List';
-import { SubscriptionForm } from '@/pages/Subscriptions/Form';
-import { Profile } from '@/pages/Users/Profile';
 import { BranchsList } from '@/pages/Branch/List';
 import { BranchForm } from '@/pages/Branch/Form';
-import { SettingsIndex } from '@/pages/Settings';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -76,15 +71,6 @@ function App() {
                 <Route element={<AuthMiddleware />}>
                   <Route element={<AuthenticatedLayout />}>
                     <Route exact path="" element={<Dashboard />} />
-                    <Route path="subscriptions">
-                      <Route exact path="" element={<SubscriptionsList />} />
-                      <Route exact path="add" element={<SubscriptionForm />}>
-                        <Route
-                          path=":subscriptionId"
-                          element={<SubscriptionForm />}
-                        />
-                      </Route>
-                    </Route>
 
                     <Route path="users">
                       <Route path="" element={<UsersList />} />
@@ -92,23 +78,12 @@ function App() {
                         <Route path=":userId" element={<UserForm />} />
                       </Route>
                     </Route>
-                    <Route path="profile" element={<Profile />}>
-                      <Route path=":id" element={<Profile />} />
-                    </Route>
 
-                    <Route path="payment-methods">
-                      <Route path="" element={<PaymentMethodsList />} />
-                    </Route>
-
-                    <Route path="branchs">
+                    <Route path="branches">
                       <Route path="" element={<BranchsList />} />
                       <Route path="add" element={<BranchForm />}>
                         <Route path=":companyId" element={<BranchForm />} />
                       </Route>
-                    </Route>
-
-                    <Route path="settings">
-                      <Route path="" element={<SettingsIndex />} />
                     </Route>
 
                     <Route path="*" element={<h1>404</h1>} />

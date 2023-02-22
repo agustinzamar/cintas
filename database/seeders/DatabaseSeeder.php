@@ -17,15 +17,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            PaymentMethodSeeder::class,
-            SettingsSeeder::class,
-            DiseaseTypesSeeder::class,
+            SizeSeeder::class,
         ]);
 
         if (config('app.env') === 'local') {
             $this->call([
                 CompanySeeder::class,
-                SubscriptionsSeeder::class,
+                VendorSeeder::class
             ]);
         }
     }

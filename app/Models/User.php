@@ -70,15 +70,6 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
-    public function headquarters()
-    {
-        if ($this->company?->isHeadQuarters()) {
-            return $this->company();
-        }
-
-        return $this->company->headquarters() ?? null;
-    }
-
     public function isSuperAdmin(): bool
     {
         return $this->role_id === RoleEnum::SUPERADMIN;

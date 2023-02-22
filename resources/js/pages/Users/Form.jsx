@@ -13,7 +13,6 @@ import { useGetRoles } from '@/hooks/users/useGetRoles';
 import { Box } from '@/components/common/Box';
 import { Select } from '@/components/common/Inputs/Select';
 import { mapRoleToForm } from '@/utils/users';
-import { CompaniesDropDown } from '@/components/admin/CompaniesDropDown';
 
 export const UserForm = () => {
   const { userId } = useParams();
@@ -73,9 +72,6 @@ export const UserForm = () => {
         </Grid>
         <Grid item xs={6} />
         {mapRoleToForm(roleId, control)}
-        <Grid item xs={6}>
-          <CompaniesDropDown control={control} />
-        </Grid>
         <Grid item xs={12}>
           <Button
             variant="outlined"

@@ -11,7 +11,6 @@ import { Box } from '@/components/common/Box';
 import { TextField } from '@/components/common/Inputs/TextField';
 import CompaniesApi from '@/api/CompaniesApi';
 import { useGetCompany } from '@/hooks/companies/useGetCompany';
-import { CompaniesDropDown } from '@/components/admin/CompaniesDropDown';
 
 export const BranchForm = () => {
   const { companyId } = useParams();
@@ -73,7 +72,7 @@ export const BranchForm = () => {
           />
         </Grid>
         <Grid item xs={6}>
-          <CompaniesDropDown control={control} disabled={!!existingCompany} />
+          {/*<CompaniesDropDown control={control} disabled={!!existingCompany} />*/}
         </Grid>
         <Grid item xs={12}>
           <Button

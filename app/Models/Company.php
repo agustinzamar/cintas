@@ -11,13 +11,8 @@ class Company extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CascadeSoftDeletes;
-
-//    use MultiTenantable;
 
     protected $with = ['headquarters', 'paymentMethods'];
-
-    protected array $cascadeDeletes = ['users'];
 
     protected $fillable = [
         'name',
@@ -34,37 +29,5 @@ class Company extends Model
     public function users()
     {
         return $this->hasMany(User::class);
-    }
-
-    public function headquarters()
-    {
-        return $this->belongsTo(Company::class, 'company_id', 'id')->withTrashed();
-    }
-
-    public function branches()
-    {
-        return $this->hasMany(Company::class)->withTrashed();
-    }
-
-    public function settings()
-    {
-        return $this->belongsToMany(Setting::class, 'companies_settings')
-            ->withPivot('is_enabled')
-            ->withTimestamps();
-    }
-
-    public function paymentMethods()
-    {
-        return $this->belongsToMany(PaymentMethod::class, 'companies_payment_methods');
-    }
-
-    public function isHeadquarters()
-    {
-        return $this->company_id === null;
-    }
-
-    public function isBranch()
-    {
-        return $this->company_id !== null;
     }
 }

@@ -1,7 +1,8 @@
 import Grid from '@mui/material/Grid';
 import { TextField } from '@/components/common/Inputs/TextField';
+import { Select } from '@/components/common/Inputs/Select';
 
-export const CustomerForm = ({ control, readonly }) => {
+export const ManagerForm = ({ control, readonly }) => {
   return (
     <>
       <Grid item xs={6}>
@@ -9,15 +10,6 @@ export const CustomerForm = ({ control, readonly }) => {
           control={control}
           name="name"
           labelText="Nombre completo"
-          required
-          disabled={readonly}
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <TextField
-          control={control}
-          name="dni"
-          labelText="DNI"
           required
           disabled={readonly}
         />
@@ -34,17 +26,25 @@ export const CustomerForm = ({ control, readonly }) => {
       <Grid item xs={6}>
         <TextField
           control={control}
+          name="dni"
+          labelText="DNI"
+          disabled={readonly}
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
+          control={control}
           name="phone"
           labelText="Teléfono"
           disabled={readonly}
         />
       </Grid>
-      <Grid item xs={4}>
-        <TextField
+      <Grid item xs={6}>
+        <Select
           control={control}
-          name="blood_type"
-          labelText="Factor sanguíneo"
-          disabled={readonly}
+          name="company_id"
+          required
+          labelText="Sucursal"
         />
       </Grid>
     </>

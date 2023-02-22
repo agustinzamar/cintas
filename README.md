@@ -8,15 +8,15 @@
 
 ### OSX
 
-1. Clone this repo `git clone https://github.com/Crystal-Desarrollo/venta-entradas.git`
-2. cd `venta-entradas`
+1. Clone this repo `git clone https://github.com/agustinzamar/cintas`
+2. cd `cintas`
 3. Use the following command to install all the backend dependencies
     ```bash
      docker run --rm \
      -u "$(id -u):$(id -g)" \
      -v $(pwd):/opt \
      -w /opt \
-     laravelsail/php80-composer:latest \
+     laravelsail/php81-composer:latest \
      composer install
      ```  
 4. `./vendor/bin/sail up -d` to start the docker container
@@ -27,15 +27,15 @@
 
 ### Windows
 
-1. Clone this repo `git clone https://github.com/agustinzamar/gym-app`
-2. cd `gym-app`
+1. Clone this repo `git clone https://github.com/agustinzamar/cintas`
+2. cd `cintas`
 3. Use the following command to install all the backend dependencies
     ```bash
      MSYS_NO_PATHCONV=1 docker run --rm \
      -u "$(id -u):$(id -g)" \
      -v $(pwd):/opt \
      -w /opt \
-     laravelsail/php80-composer:latest \
+     laravelsail/php81-composer:latest \
      composer install
      ```  
 

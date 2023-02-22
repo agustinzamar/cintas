@@ -5,14 +5,13 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { ListItem } from '@/layouts/Authenticated/ListItem';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
-import PaymentIcon from '@mui/icons-material/Payment';
-import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
-import PersonIcon from '@mui/icons-material/Person';
 import StoreIcon from '@mui/icons-material/Store';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
@@ -58,31 +57,15 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       <Divider />
       <List component="nav">
         <ListItem text="Inicio" icon={<DashboardIcon />} url="/" />
-        <ListItem text="Perfil" icon={<PersonIcon />} url="/profile" />
+        <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/requests" />
+        <ListItem text="Productos" icon={<SettingsIcon />} url="/products" />
+        <ListItem
+          text="Proveedores"
+          icon={<LocalShippingIcon />}
+          url="/vendors"
+        />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
         <ListItem text="Sucursales" icon={<StoreIcon />} url="/branchs" />
-        <ListItem
-          text="Planes y clases"
-          icon={<LocalActivityIcon />}
-          url="/subscriptions"
-        />
-        <ListItem
-          text="Medios de pago"
-          icon={<PaymentIcon />}
-          url="/payment-methods"
-        />
-        <ListItem
-          text="Rutinas de ejercicio"
-          icon={<SettingsIcon />}
-          url="/settings"
-        />
-        <ListItem text="Alimentación" icon={<SettingsIcon />} url="/settings" />
-        <ListItem text="Productos" icon={<SettingsIcon />} url="/settings" />
-        <ListItem
-          text="Configuración"
-          icon={<SettingsIcon />}
-          url="/settings"
-        />
       </List>
     </Drawer>
   );
