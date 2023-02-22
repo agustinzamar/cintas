@@ -62,9 +62,9 @@ export const BranchsList = () => {
               <TableRow>
                 <TableCell>Nombre</TableCell>
                 <TableCell>Descripción</TableCell>
+                <TableCell>Provincia</TableCell>
+                <TableCell>Dirección</TableCell>
                 <TableCell>Estado</TableCell>
-                <TableCell>Tipo</TableCell>
-                {isSuperAdmin && <TableCell>Empresa</TableCell>}
                 <TableCell align="right">Acciones</TableCell>
               </TableRow>
             </TableHead>
@@ -77,12 +77,6 @@ export const BranchsList = () => {
                     <TableCell>
                       {branch.deleted_at ? 'Inactivo' : 'Activo'}
                     </TableCell>
-                    <TableCell>
-                      {branch.headquarters ? 'Sucursal' : 'Principal'}
-                    </TableCell>
-                    {isSuperAdmin && (
-                      <TableCell>{branch.headquarters?.name}</TableCell>
-                    )}
                     <TableCell align="right">
                       <EditButton
                         tooltipText="Editar plan"

@@ -71,9 +71,6 @@ export const BranchForm = () => {
             name="description"
           />
         </Grid>
-        <Grid item xs={6}>
-          {/*<CompaniesDropDown control={control} disabled={!!existingCompany} />*/}
-        </Grid>
         <Grid item xs={12}>
           <Button
             variant="outlined"

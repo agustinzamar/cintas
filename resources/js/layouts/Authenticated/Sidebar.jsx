@@ -65,7 +65,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
           url="/vendors"
         />
         <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
-        <ListItem text="Sucursales" icon={<StoreIcon />} url="/branchs" />
+        <ListItem text="Sucursales" icon={<StoreIcon />} url="/branches" />
       </List>
     </Drawer>
   );
