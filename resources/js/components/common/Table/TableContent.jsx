@@ -41,23 +41,22 @@ export const TableContent = props => {
     headCells,
     records,
     comparator = genericDescendingComparator,
-    defaultRowsPerPage,
-    rowFunctions,
+    defaultRowsPerPage = 5,
   } = props;
   const Row = props.row;
 
   const [orderDirection, setOrderDirection] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(parseInt(defaultRowsPerPage));
+  const [rowsPerPage, setRowsPerPage] = useState(defaultRowsPerPage);
 
-  const handleSortRequest = (_, property) => {
-    const isAscending = orderBy === property && orderDirection === 'asc';
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && orderDirection === 'asc';
+    setOrderDirection(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
-    setOrderDirection(isAscending ? 'desc' : 'asc');
   };
 
-  const handleChangePage = (_, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
@@ -94,12 +93,12 @@ export const TableContent = props => {
             headCells={headCells}
             orderBy={orderBy}
             orderDirection={orderDirection}
-            handleSortRequest={handleSortRequest}
+            handleSortRequest={handleRequestSort}
           />
           <TableBody>
-            {rows.length > 0 ? (
-              rows.map(x => {
-                return <Row key={x.id} data={x} {...rowFunctions} />;
+            {rows?.length > 0 ? (
+              rows.map(data => {
+                return <Row key={data.id} data={data} />;
               })
             ) : (
               <TableRow>
@@ -112,13 +111,13 @@ export const TableContent = props => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 50]}
-        component="div"
-        count={records.length}
         rowsPerPage={rowsPerPage}
         page={page}
+        count={records.length}
+        component="div"
+        rowsPerPageOptions={[5, 10, 25, 50]}
         onPageChange={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </ThemeProvider>
   );
