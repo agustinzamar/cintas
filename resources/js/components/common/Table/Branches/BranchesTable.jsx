@@ -1,6 +1,7 @@
 import { TableContent } from '@/components/common/Table/TableContent';
 import { BranchesTableRow } from '@/components/common/Table/Branches/BranchesTableRow';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
+import { Box } from '@/components/common/Box';
 
 const headCells = [
   { id: 'name', label: 'Nombre', isSortable: true },
@@ -14,11 +15,13 @@ export const BranchesTable = () => {
   const { data, isLoading } = useGetAllCompanies();
 
   return (
-    <TableContent
-      records={data}
-      headCells={headCells}
-      row={BranchesTableRow}
-      isLoading={isLoading}
-    />
+    <Box>
+      <TableContent
+        records={data}
+        headCells={headCells}
+        row={BranchesTableRow}
+        isLoading={isLoading}
+      />
+    </Box>
   );
 };

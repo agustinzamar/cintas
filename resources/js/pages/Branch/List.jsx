@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
-import { Box } from '@/components/common/Box';
 import { BranchesTable } from '@/components/common/Table/Branches/BranchesTable';
 
 export const BranchsList = () => {
@@ -19,9 +18,7 @@ export const BranchsList = () => {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        <Box>
-          <BranchesTable />
-        </Box>
+        <BranchesTable />
       </Grid>
     </Grid>
   );
