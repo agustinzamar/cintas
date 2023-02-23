@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { esES } from '@mui/material/locale';
 import { TableHeader } from './TableHeader';
+import { Loader } from '@/components/common/Loader';
 
 const theme = createTheme({}, esES);
 
@@ -39,9 +40,10 @@ function getComparator(order, orderBy, descendingComparator) {
 export const TableContent = props => {
   const {
     headCells,
-    records,
+    records = [],
     comparator = genericDescendingComparator,
     defaultRowsPerPage = 5,
+    isLoading = false,
   } = props;
   const Row = props.row;
 
@@ -84,6 +86,8 @@ export const TableContent = props => {
   };
 
   const rows = getRecords();
+
+  if (isLoading) return <Loader />;
 
   return (
     <ThemeProvider theme={theme}>
