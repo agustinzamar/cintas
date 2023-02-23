@@ -7,20 +7,23 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('app-token');
+
+  const getAuth = async () => {
+    setLoading(true);
+    try {
+      const res = await AuthApi.me();
+      setAuth(res.data);
+    } catch (e) {
+      setAuth(null);
+      localStorage.removeItem('app-token');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (!auth || !token) {
-      setLoading(true);
-      AuthApi.me()
-        .then(res => setAuth(res.data))
-        .catch(() => {
-          setAuth(null);
-          localStorage.removeItem('app-token');
-        })
-        .finally(() => setLoading(false));
-    }
-  }, []);
+    if (!auth) getAuth();
+  }, [auth]);
 
   const login = data => {
     return AuthApi.login(data).then(res => {

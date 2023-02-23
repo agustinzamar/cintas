@@ -1,12 +1,13 @@
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { Navigate, Outlet } from 'react-router-dom';
 
 export function GuestMiddleware() {
   const { auth } = useAuth();
+  const location = useLocation();
 
-  if (auth) {
-    return <Navigate to="/" replace />;
+  if (!auth) {
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  return <Navigate to={location.state.path} replace />;
 }

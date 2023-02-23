@@ -10,8 +10,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 import { createTheme, ThemeProvider } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
-
-import { GuestMiddleware } from '@/routes/GuestMiddleware';
 import { LoginPage } from '@/pages/Login';
 import { Index as AuthenticatedLayout } from '@/layouts/Authenticated';
 import { Index as GuestLayout } from '@/layouts/Guest';
@@ -20,6 +18,8 @@ import { UsersList } from '@/pages/Users/List';
 import { UserForm } from '@/pages/Users/Form';
 import { BranchsList } from '@/pages/Branch/List';
 import { BranchForm } from '@/pages/Branch/Form';
+import { VendorForm } from '@/pages/Vendors/Form';
+import { GuestMiddleware } from '@/routes/GuestMiddleware';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -57,14 +57,10 @@ function App() {
             <Router>
               <Routes>
                 {/*Public routes*/}
-                <Route
-                  element={
-                    <GuestMiddleware>
-                      <GuestLayout />
-                    </GuestMiddleware>
-                  }
-                >
-                  <Route exact path="login" element={<LoginPage />} />
+                <Route element={<GuestMiddleware />}>
+                  <Route element={<GuestLayout />}>
+                    <Route exact path="login" element={<LoginPage />} />
+                  </Route>
                 </Route>
 
                 {/*Protected routes*/}
@@ -83,6 +79,12 @@ function App() {
                       <Route path="" element={<BranchsList />} />
                       <Route path="add" element={<BranchForm />}>
                         <Route path=":companyId" element={<BranchForm />} />
+                      </Route>
+                    </Route>
+
+                    <Route path="vendors">
+                      <Route path="add" element={<VendorForm />}>
+                        <Route path=":vendorId" element={<VendorForm />} />
                       </Route>
                     </Route>
 
