@@ -37,8 +37,8 @@ export const UsersTableRow = ({ data: user }) => {
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell>{user.role?.name || ''}</TableCell>
-      <TableCell>{user.deleted_at ? 'Inactivo' : 'Activo'}</TableCell>
       <TableCell>{user.company?.name}</TableCell>
+      <TableCell>{user.deleted_at ? 'Inactivo' : 'Activo'}</TableCell>
       <TableCell align="right">
         <EditButton
           tooltipText="Editar usuario"
