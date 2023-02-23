@@ -1,5 +1,5 @@
-import { TableContent } from '@/components/common/Table/TableContent';
-import { UsersTableRow } from '@/components/common/Table/Users/UsersTableRow';
+import { TableContent } from '@/components/Table/TableContent';
+import { UsersTableRow } from '@/components/Table/Users/UsersTableRow';
 import { useGetAllUsers } from '@/hooks/users/useGetAllUsers';
 import { Box } from '@/components/common/Box';
 

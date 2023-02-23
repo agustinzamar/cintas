@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
-import { BranchesTable } from '@/components/common/Table/Branches/BranchesTable';
+import { BranchesTable } from '@/components/Table/Branches/BranchesTable';
 
 export const BranchsList = () => {
   return (

@@ -20,6 +20,7 @@ import { BranchsList } from '@/pages/Branch/List';
 import { BranchForm } from '@/pages/Branch/Form';
 import { VendorForm } from '@/pages/Vendors/Form';
 import { GuestMiddleware } from '@/routes/GuestMiddleware';
+import { VendorsList } from '@/pages/Vendors/List';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -83,6 +84,7 @@ function App() {
                     </Route>
 
                     <Route path="vendors">
+                      <Route path="" element={<VendorsList />} />
                       <Route path="add" element={<VendorForm />}>
                         <Route path=":vendorId" element={<VendorForm />} />
                       </Route>

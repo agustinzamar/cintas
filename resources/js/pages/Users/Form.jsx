@@ -7,7 +7,6 @@ import { useMutation } from 'react-query';
 import UsersApi from '@/api/UsersApi';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
-import { Loader } from '@/components/common/Loader';
 import { useGetUser } from '@/hooks/users/useGetUser';
 import { useGetRoles } from '@/hooks/users/useGetRoles';
 import { Box } from '@/components/common/Box';
@@ -64,8 +63,11 @@ export const UserForm = () => {
   const isLoading = isLoadingCompanies || isLoadingMutate;
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-      {isLoading && <Loader />}
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      isLoading={isLoading}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Title>{title}</Title>

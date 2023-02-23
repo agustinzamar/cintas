@@ -1,5 +1,5 @@
-import { TableContent } from '@/components/common/Table/TableContent';
-import { BranchesTableRow } from '@/components/common/Table/Branches/BranchesTableRow';
+import { TableContent } from '@/components/Table/TableContent';
+import { BranchesTableRow } from '@/components/Table/Branches/BranchesTableRow';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
 import { Box } from '@/components/common/Box';
 

@@ -2,9 +2,9 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
-import { UsersTable } from '@/components/Table/Users/UsersTable';
+import { VendorsTable } from '@/components/Table/Vendors/VendorsTable';
 
-export const UsersList = () => {
+export const VendorsList = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={8}>
@@ -12,13 +12,13 @@ export const UsersList = () => {
           variant="contained"
           startIcon={<AddIcon />}
           component={Link}
-          to="/users/add"
+          to="/vendors/add"
         >
-          Nuevo usuario
+          Nuevo proveedor
         </Button>
       </Grid>
       <Grid item xs={12}>
-        <UsersTable />
+        <VendorsTable />
       </Grid>
     </Grid>
   );

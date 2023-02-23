@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
-import { Loader } from '@/components/common/Loader';
 import { Box } from '@/components/common/Box';
 import { TextField } from '@/components/common/Inputs/TextField';
 import CompaniesApi from '@/api/CompaniesApi';
@@ -58,8 +57,11 @@ export const BranchForm = () => {
   const isLoading = isLoadingMutate || isLoadingProvinces || isLoadingCities;
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-      {isLoading && <Loader />}
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      isLoading={isLoading}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Title>{title}</Title>

@@ -11,7 +11,12 @@ export const Box = ({
 }) => {
   return (
     <Paper
-      style={{ position: 'relative', padding: '1rem', ...style }}
+      style={{
+        position: 'relative',
+        padding: '1rem',
+        minHeight: '100px',
+        ...style,
+      }}
       component={component}
       onSubmit={onSubmit}
       {...rest}
