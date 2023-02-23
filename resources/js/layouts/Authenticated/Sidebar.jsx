@@ -10,7 +10,6 @@ import { styled } from '@mui/material/styles';
 import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import HomeIcon from '@mui/icons-material/Home';
 
 const Drawer = styled(MuiDrawer, {
@@ -58,7 +57,6 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       <List component="nav">
         <ListItem text="Inicio" icon={<HomeIcon />} url="/" />
         <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/requests" />
-        <ListItem text="Productos" icon={<InventoryIcon />} url="/products" />
         <ListItem
           text="Proveedores"
           icon={<LocalShippingIcon />}
