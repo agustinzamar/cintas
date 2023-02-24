@@ -8,6 +8,10 @@ class AuthApi {
   me() {
     return axiosIntance.get('/me');
   }
+
+  async logout() {
+    return await axiosIntance.delete('/logout');
+  }
 }
 
 export default new AuthApi();

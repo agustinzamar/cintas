@@ -3,9 +3,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MuiAppBar from '@mui/material/AppBar';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Tooltip from '@mui/material/Tooltip';
+import { useAuth } from '@/hooks/useAuth';
 
 const drawerWidth = 240;
 
@@ -28,6 +29,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const Header = ({ onToggleDrawer, open }) => {
+  const { auth, logout } = useAuth();
+
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar
@@ -52,15 +55,25 @@ export const Header = ({ onToggleDrawer, open }) => {
           variant="h6"
           color="inherit"
           noWrap
-          sx={{ flexGrow: 1 }}
+          sx={{ marginRight: '32px', marginLeft: 'auto' }}
         >
-          Dashboard
+          Bienvenido, {auth?.name}
         </Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
+        <Tooltip title="Cerrar sesión">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={logout}
+          >
+            <LogoutIcon />
+          </IconButton>
+        </Tooltip>
+        {/*<IconButton color="inherit">*/}
+        {/*  <Badge badgeContent={4} color="secondary">*/}
+        {/*    <NotificationsIcon />*/}
+        {/*  </Badge>*/}
+        {/*</IconButton>*/}
       </Toolbar>
     </AppBar>
   );

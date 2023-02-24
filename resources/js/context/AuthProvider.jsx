@@ -32,8 +32,15 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const logout = () => {
+    AuthApi.logout().then(() => {
+      setAuth(null);
+      localStorage.removeItem('app-token');
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ auth, login }}>
+    <AuthContext.Provider value={{ auth, login, logout }}>
       {loading ? <Loader /> : children}
     </AuthContext.Provider>
   );
