@@ -17,7 +17,8 @@ class RoleSeeder extends Seeder
         Role::insert([
             ['name' => 'Superadmin', 'is_public' => false],
             ['name' => 'Administrador', 'is_public' => true],
-            ['name' => 'Gerente', 'is_public' => true]
+            ['name' => 'Gerente de sucursal', 'is_public' => true],
+            ['name' => 'Encargado de depósito', 'is_public' => true],
         ]);
     }
 }
