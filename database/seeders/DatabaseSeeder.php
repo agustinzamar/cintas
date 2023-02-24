@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             SizeSeeder::class,
+            RequestStatusSeeder::class,
         ]);
 
         if (config('app.env') === 'local') {

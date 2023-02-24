@@ -3,11 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CompaniesController;
-use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\ProvincesController;
+use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VendorsController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('cities', [CitiesController::class, 'index']);
     Route::get('cities/{provinceId}', [CitiesController::class, 'getByProvince']);
 
+    // ---- [ Requests ] ----
+    Route::apiResource('requests', RequestsController::class);
+
     // Actions only allowed to the admins and superadmins
     Route::middleware('auth.admin')->group(function () {
         // ---- [ Roles ] ----
@@ -49,6 +50,9 @@ Route::middleware('auth:sanctum')->group(function () {
         // ---- [ Vendors ] ----
         Route::apiResource('vendors', VendorsController::class);
         Route::post('companies/{vendor}/restore', [VendorsController::class, 'restore']);
+
+        // ---- [ Requests ] ----
+        Route::put('requests/{request}/updateStatus', [RequestsController::class, 'updateStatus']);
     });
 
     // Actions only allowed to the superadmin
