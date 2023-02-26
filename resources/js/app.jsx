@@ -28,13 +28,113 @@ const root = createRoot(element);
 const queryClient = new QueryClient();
 
 const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#004e7b',
+      light: '#0268a2',
+      dark: '#002f4a',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#E63462',
+      light: '#f34772',
+      dark: '#ad1a40',
+      contrastText: '#ffffff',
+    },
+    background: {
+      default: '#ffffff',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#000000',
+      disabled: '#000000',
+      hint: '#000000',
+    },
+    error: {
+      main: '#d20f46',
+      light: '#f24073',
+      dark: '#86092c',
+      contrastText: '#ffffff',
+    },
+    warning: {
+      main: '#f59e0b',
+      light: '#fbbf24',
+      dark: '#d97706',
+      contrastText: '#000000',
+    },
+    info: {
+      main: '#0288d1',
+      light: '#349fda',
+      dark: '#015f92',
+      contrastText: '#ffffff',
+    },
+    success: {
+      main: '#2e7d32',
+      light: '#57975b',
+      dark: '#205723',
+      contrastText: '#ffffff',
+    },
+    divider: 'rgba(0,0,0,0.3)',
+  },
+  typography: {
+    fontSize: 16,
+    fontWeightBold: 700,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    htmlFontSize: 16,
+    h1: {
+      fontSize: 32,
+      fontWeight: 600,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    h2: {
+      fontSize: 24,
+      fontWeight: 600,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    h3: {
+      fontSize: 18,
+      fontWeight: 400,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    h4: {
+      fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    h5: {
+      fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    h6: {
+      fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1,
+      letterSpacing: '0em',
+    },
+    button: {
+      fontSize: 16,
+      fontWeight: 400,
+      lineHeight: 1.01,
+      letterSpacing: '0em',
+    },
+  },
   components: {
     MuiFormLabel: {
       styleOverrides: {
         asterisk: {
-          color: '#db3131',
+          color: '#d20f46',
           '&$error': {
-            color: '#db3131',
+            color: '#d20f46',
           },
         },
       },
