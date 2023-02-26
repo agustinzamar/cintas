@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 
 export const ListItem = ({ icon, text, url }) => {
   return (
-    <Link to={url}>
+    <Link
+      to={url}
+      style={{ textDecoration: 'none', color: 'rgb(0 0 0 / 54%)' }}
+    >
       <ListItemButton>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />
