@@ -8,7 +8,7 @@ import { Sidebar } from '@/layouts/Authenticated/Sidebar';
 import { Header } from '@/layouts/Authenticated/Header';
 
 export function Index() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
