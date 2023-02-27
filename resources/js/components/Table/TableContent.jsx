@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Box,
   createTheme,
   Table,
   TableBody,
@@ -8,10 +9,12 @@ import {
   TablePagination,
   TableRow,
   ThemeProvider,
+  Typography,
 } from '@mui/material';
 import { esES } from '@mui/material/locale';
 import { TableHeader } from './TableHeader';
 import { Loader } from '@/components/common/Loader';
+import EmptyData from '@/assets/img/emptyData.png';
 
 const theme = createTheme({}, esES);
 
@@ -88,6 +91,22 @@ export const TableContent = props => {
   const rows = getRecords();
 
   if (isLoading) return <Loader />;
+
+  if (rows?.length === 0)
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '16px',
+          p: 4,
+        }}
+      >
+        <img src={EmptyData} alt="No hay datos" style={{ margin: 'auto' }} />
+        <Typography variant="h2">Aun no hay nada por aqui</Typography>
+      </Box>
+    );
 
   return (
     <ThemeProvider theme={theme}>
