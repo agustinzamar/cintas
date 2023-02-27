@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
+import { toast } from 'react-toastify';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();
@@ -20,9 +21,11 @@ export function LoginForm() {
   const { state } = useLocation();
 
   const onSubmit = data => {
-    login(data).then(() => {
-      navigate(state?.path || '/');
-    });
+    login(data)
+      .then(() => {
+        navigate(state?.path || '/');
+      })
+      .catch(() => toast.error('Usuario o contraseña incorrecta'));
   };
 
   return (
