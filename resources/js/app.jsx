@@ -143,6 +143,14 @@ const theme = createTheme({
       defaultProps: {
         type: 'submit',
       },
+      styleOverrides: {
+        root: {
+          padding: '12px 16px',
+          minWidth: '0px',
+          lineHeight: 'initial',
+          textTransform: 'initial',
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {
