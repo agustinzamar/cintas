@@ -204,10 +204,10 @@ function App() {
                         <Route path=":vendorId" element={<VendorForm />} />
                       </Route>
                     </Route>
-
-                    <Route path="*" element={<h1>404</h1>} />
                   </Route>
                 </Route>
+
+                <Route path="*" element={<h1>404</h1>} />
               </Routes>
             </Router>
           </ThemeProvider>
