@@ -144,6 +144,13 @@ const theme = createTheme({
         type: 'submit',
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          overflowX: 'auto',
+        },
+      },
+    },
   },
 });
 
