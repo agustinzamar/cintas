@@ -14,7 +14,6 @@ export const Box = ({
       style={{
         position: 'relative',
         padding: '1rem',
-        minHeight: '100px',
         ...style,
       }}
       component={component}

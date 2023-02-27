@@ -56,7 +56,7 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       <Divider />
       <List component="nav">
         <ListItem text="Inicio" icon={<HomeIcon />} url="/" />
-        <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/requests" />
+        <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/orders" />
         <ListItem
           text="Proveedores"
           icon={<LocalShippingIcon />}

@@ -8,10 +8,11 @@ export const TextField = ({
   name,
   labelText = '',
   required,
+  fullWidth = true,
   ...rest
 }) => {
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth={fullWidth}>
       <Controller
         control={control}
         name={name}

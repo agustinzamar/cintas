@@ -8,12 +8,11 @@ export const Switch = ({
   defaultChecked = false,
   name,
   labelText = '',
-  fullWidth = true,
   labelPlacement = 'end',
   ...rest
 }) => {
   return (
-    <FormControl fullWidth={fullWidth}>
+    <FormControl>
       <Controller
         control={control}
         name={name}
