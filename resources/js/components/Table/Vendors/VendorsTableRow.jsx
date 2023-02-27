@@ -21,7 +21,7 @@ export const VendorsTableRow = ({ data: vendor }) => {
   };
 
   const handleActivateVendor = vendorId => {
-    VendorsApi.enable(vendorId)
+    VendorsApi.restore(vendorId)
       .then(() => {
         toast.success('Proveedor activado exitosamente');
         queryClient.invalidateQueries(['vendors']);

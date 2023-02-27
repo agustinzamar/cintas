@@ -26,7 +26,7 @@ export const VendorForm = () => {
     if (existingVendor) {
       reset(existingVendor);
     }
-  }, [existingVendor, reset]);
+  }, [existingVendor]);
 
   const onSubmit = data => {
     data.id = vendorId;
