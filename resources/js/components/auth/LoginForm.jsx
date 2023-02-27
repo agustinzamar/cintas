@@ -1,4 +1,3 @@
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -6,13 +5,13 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Copyright } from '@/components/Copyright';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import logo from '@/assets/img/logo.png';
+import Bubble from '@/assets/img/bubble.png';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();
@@ -27,21 +26,49 @@ export function LoginForm() {
   };
 
   return (
-    <Container maxWidth="xs" onSubmit={handleSubmit(onSubmit)}>
+    <Container
+      onSubmit={handleSubmit(onSubmit)}
+      maxWidth="xs"
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <img
+        src={Bubble}
+        alt="algo"
+        style={{
+          position: 'absolute',
+          bottom: '0',
+          left: '0',
+          width: '30vmin',
+        }}
+      />
+      <img
+        src={Bubble}
+        alt="algo"
+        style={{
+          position: 'absolute',
+          top: '0',
+          right: '0',
+          transform: 'rotate(180deg)',
+          width: '30vmin',
+        }}
+      />
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
+        <img src={logo} alt="Logo" width="250" />
+        {/* <Typography component="h1" variant="h5">
           Sign in
-        </Typography>
+        </Typography> */}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -73,7 +100,15 @@ export function LoginForm() {
           >
             Sign In
           </Button>
-          <Grid container>
+          <Grid
+            container
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
@@ -81,7 +116,7 @@ export function LoginForm() {
             </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {'Don\'t have an account? Sign Up'}
+                Don't have an account? Sign Up
               </Link>
             </Grid>
           </Grid>
