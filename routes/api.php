@@ -6,6 +6,7 @@ use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\ProvincesController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SizesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VendorsController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('provinces', [ProvincesController::class, 'index']);
     Route::get('cities', [CitiesController::class, 'index']);
     Route::get('cities/{provinceId}', [CitiesController::class, 'getByProvince']);
+
+    // ---- [ Sizes ] ----
+    Route::apiResource('sizes', SizesController::class);
 
     // ---- [ Requests ] ----
     Route::apiResource('requests', RequestsController::class);

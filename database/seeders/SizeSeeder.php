@@ -15,11 +15,11 @@ class SizeSeeder extends Seeder
     public function run()
     {
         Size::insert([
-            ['from' => 18, 'to' => 21, 'description' => 'Bebé'],
-            ['from' => 22, 'to' => 26, 'description' => 'Niño'],
-            ['from' => 27, 'to' => 34, 'description' => 'Juvenil'],
-            ['from' => 35, 'to' => 40, 'description' => 'Dama'],
-            ['from' => 39, 'to' => 44, 'description' => 'Hombre'],
+            ['label' => '18 - 21', 'values' => json_encode([18, 19, 20, 21]), 'description' => 'Bebé'],
+            ['label' => '22 - 26', 'values' => json_encode([22, 23, 24, 25, 26]), 'description' => 'Niño'],
+            ['label' => '27 - 34', 'values' => json_encode([27, 28, 29, 30, 31, 32, 33, 34]), 'description' => 'Juvenil'],
+            ['label' => '34 - 40', 'values' => json_encode([34, 35, 36, 37, 38, 39, 40]), 'description' => 'Dama'],
+            ['label' => '39 - 44', 'values' => json_encode([39, 40, 41, 42, 43, 44]), 'description' => 'Hombre'],
         ]);
     }
 }
