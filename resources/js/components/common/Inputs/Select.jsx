@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 function renderItems(data = []) {
   return data.map(item => (
     <MenuItem value={item.id} key={item.id}>
-      {item.name}
+      {item.name ? item.name : item.label}
     </MenuItem>
   ));
 }

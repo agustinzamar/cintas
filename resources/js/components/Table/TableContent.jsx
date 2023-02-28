@@ -47,6 +47,7 @@ export const TableContent = props => {
     comparator = genericDescendingComparator,
     defaultRowsPerPage = 5,
     isLoading = false,
+    onDeleteItem = null,
   } = props;
   const Row = props.row;
 
@@ -121,7 +122,9 @@ export const TableContent = props => {
           <TableBody>
             {rows?.length > 0 ? (
               rows.map(data => {
-                return <Row key={data.id} data={data} />;
+                return (
+                  <Row key={data.id} data={data} onDeleteItem={onDeleteItem} />
+                );
               })
             ) : (
               <TableRow>

@@ -1,21 +1,20 @@
 import { TableCell, TableRow } from '@mui/material';
 import { DeleteButton } from '@/components/common/IconButtons/DeleteButton';
 
-export const NewOrderTableRow = ({ data: item }) => {
-  const handleDelete = id => {};
-
+export const NewOrderTableRow = ({ data: item, onDeleteItem }) => {
   return (
     <TableRow key={item.id}>
-      <TableCell>{item.vendor.name}</TableCell>
-      <TableCell>{item.product_name}</TableCell>
-      <TableCell>{item.product_color}</TableCell>
-      <TableCell>{item.product_size}</TableCell>
+      <TableCell>{item.id}</TableCell>
+      <TableCell>{item.vendor_name}</TableCell>
+      <TableCell>{item.name}</TableCell>
+      <TableCell>{item.color}</TableCell>
+      <TableCell>{item.size}</TableCell>
       <TableCell>{item.quantity}</TableCell>
       <TableCell>{item.additional_information}</TableCell>
       <TableCell align="right">
         <DeleteButton
           tooltipText="Eliminar artículo"
-          handleClick={() => handleDelete(item.id)}
+          onClick={() => onDeleteItem(item.id)}
         />
       </TableCell>
     </TableRow>

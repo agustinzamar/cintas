@@ -130,6 +130,11 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiInputBase: {
+      defaultProps: {
+        size: 'medium',
+      },
+    },
     MuiFormLabel: {
       styleOverrides: {
         asterisk: {

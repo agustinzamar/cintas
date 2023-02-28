@@ -9,6 +9,7 @@ export const TextField = ({
   labelText = '',
   required,
   fullWidth = true,
+  disabled = false,
   ...rest
 }) => {
   return (
@@ -25,6 +26,7 @@ export const TextField = ({
             inputRef={ref}
             value={value || ''}
             name={name}
+            disabled={disabled}
             {...rest}
           />
         )}
