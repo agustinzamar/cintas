@@ -42,7 +42,7 @@ export function LoginForm() {
     >
       <img
         src={Bubble}
-        alt="algo"
+        alt="asset_bubble"
         style={{
           position: 'absolute',
           bottom: '0',
@@ -52,7 +52,7 @@ export function LoginForm() {
       />
       <img
         src={Bubble}
-        alt="algo"
+        alt="asset_bubble"
         style={{
           position: 'absolute',
           top: '0',
