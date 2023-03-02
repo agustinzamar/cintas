@@ -26,7 +26,7 @@ class UserCreatedEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bienvenido',
+            subject: 'Bienvenido a Cintas Calzados',
         );
     }
 
