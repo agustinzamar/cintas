@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 
-class RequestStatusSeeder extends Seeder
+class OrderStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,23 +16,23 @@ class RequestStatusSeeder extends Seeder
     {
         OrderStatus::insert([
             [
-                'name' => 'draft',
+                'name' => 'Borrador',
                 'description' => 'El pedido aun no hay sido enviado.',
             ],
             [
-                'name' => 'submitted',
+                'name' => 'Enviado',
                 'description' => 'El pedido ha sido enviado y esta eperando aprobación.',
             ],
             [
-                'name' => 'approved',
+                'name' => 'Approbado',
                 'description' => 'El pedido ha sido aprobado.',
             ],
             [
-                'name' => 'rejected',
+                'name' => 'Rechazado',
                 'description' => 'El pedido ha sido rechazado.',
             ],
             [
-                'name' => 'cancelled',
+                'name' => 'Cancelado',
                 'description' => 'El pedido ha sido cancelado.',
             ],
         ]);
