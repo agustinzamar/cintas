@@ -26,6 +26,7 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'company_id' => ['nullable', 'integer', 'exists:companies,id'],
             'order_status_id' => ['required', 'integer', Rule::in(OrderStatusEnum::DRAFT, OrderStatusEnum::SUBMITTED)],
             'items' => ['required', 'array'],
             'items.*.name' => ['nullable', 'string'],

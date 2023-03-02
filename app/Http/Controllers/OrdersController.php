@@ -45,7 +45,7 @@ class OrdersController extends Controller
         $order = Order::create([
             'order_status_id' => $validated['order_status_id'] ?? OrderStatusEnum::DRAFT,
             'user_id' => $user->id,
-            'company_id' => $user->company_id,
+            'company_id' => $validated['company_id'] ?? $user->company_id,
         ]);
 
         $requestItems = $this->getRequestItems($validated['items'], $order->id);

@@ -26,6 +26,7 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'company_id' => ['nullable', 'integer', 'exists:companies,id'],
             'order_status_id' => ['nullable', 'integer', Rule::in(OrderStatusEnum::DRAFT, OrderStatusEnum::SUBMITTED)],
             'items' => ['required', 'array'],
             'items.*.id' => ['nullable', 'integer', 'exists:request_items,id'],
