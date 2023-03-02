@@ -20,6 +20,11 @@ class OrdersApi {
     const response = await axiosIntance.put(`/orders/${data.id}`, data);
     return response.data;
   }
+
+  async delete(id) {
+    const response = await axiosIntance.delete(`/orders/${id}`);
+    return response.data;
+  }
 }
 
 export default new OrdersApi();

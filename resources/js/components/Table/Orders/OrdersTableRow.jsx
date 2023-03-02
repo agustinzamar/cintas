@@ -6,6 +6,10 @@ import { RoleEnum } from '@/enums/RoleEnum';
 import { PrintButton } from '@/components/common/IconButtons/PrintButton';
 import { OrderStatusEnum } from '@/enums/OrderStatusEnum';
 import { EyeButton } from '@/components/common/IconButtons/EyeButton';
+import { DeleteButton } from '@/components/common/IconButtons/DeleteButton';
+import { useMutation, useQueryClient } from 'react-query';
+import OrdersApi from '@/api/OrdersApi';
+import { toast } from 'react-toastify';
 
 export const OrdersTableRow = ({ data: order }) => {
   const navigate = useNavigate();
@@ -15,8 +19,20 @@ export const OrdersTableRow = ({ data: order }) => {
   const isManager = roleId === RoleEnum.MANAGER;
   const isAdmin = roleId === RoleEnum.ADMIN || roleId === RoleEnum.SUPERADMIN;
   const isWarehouseManager = roleId === RoleEnum.WAREHOUSE_MANAGER;
+  const { mutate } = useMutation(OrdersApi.delete);
+  const queryClient = useQueryClient();
 
   const handlePrint = () => {};
+
+  const handleDelete = id => {
+    mutate(id, {
+      onSuccess: () => {
+        toast.success('Pedido cancelado exitosamente.');
+        queryClient.invalidateQueries('orders');
+      },
+      onError: () => toast.error('Lo sentimos, algo salió mal'),
+    });
+  };
 
   return (
     <TableRow>
@@ -47,6 +63,13 @@ export const OrdersTableRow = ({ data: order }) => {
             onClick={handlePrint}
             tooltipText="Imprimir pedido"
             disabled={order.status?.id === OrderStatusEnum.DRAFT}
+          />
+        )}
+
+        {order.status?.id === OrderStatusEnum.DRAFT && (
+          <DeleteButton
+            onClick={() => handleDelete(order.id)}
+            tooltipText="Eliminar borrador"
           />
         )}
       </TableCell>

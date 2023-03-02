@@ -16,11 +16,7 @@ export const OrdersList = () => {
     <Box>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <MuiBox
-            display="flex"
-            alignItems="baseline"
-            justifyContent="space-between"
-          >
+          <MuiBox display="flex" alignItems="baseline">
             <Button
               variant="contained"
               startIcon={<AddIcon />}
@@ -31,7 +27,10 @@ export const OrdersList = () => {
               Nuevo pedido
             </Button>
             {user.role?.id === RoleEnum.MANAGER && (
-              <Title>Pedidos de la sucursal {user.company?.name}</Title>
+              <Title>
+                Solo se visualizan los pedidos pendientes de envío
+                correspondientes a la sucursal "{user.company?.name}"
+              </Title>
             )}
           </MuiBox>
         </Grid>
