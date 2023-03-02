@@ -77,7 +77,7 @@ export function LoginForm() {
             margin="normal"
             required
             fullWidth
-            label="Email Address"
+            label="Direccion de email"
             autoComplete="email"
             autoFocus
             {...register('email', { required: true })}
@@ -86,14 +86,14 @@ export function LoginForm() {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label="Contraseña"
             type="password"
             autoComplete="current-password"
             {...register('password', { required: true })}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label="Recordarme"
           />
           <Button
             type="submit"
@@ -101,7 +101,7 @@ export function LoginForm() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Ingresar
           </Button>
           <Grid
             container
@@ -114,12 +114,7 @@ export function LoginForm() {
           >
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
+                ¿Olvidaste tu contraseña? Click aqui. 👈
               </Link>
             </Grid>
           </Grid>
