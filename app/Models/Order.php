@@ -14,7 +14,7 @@ class Order extends Model
 {
     use HasFactory, Multitenantable, SoftDeletes;
 
-    protected $with = ['items', 'status'];
+    protected $with = ['items', 'status', 'user'];
 
     protected $fillable = [
         'order_status_id',
@@ -30,6 +30,11 @@ class Order extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function canBeEdited(): bool

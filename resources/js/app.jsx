@@ -22,6 +22,7 @@ import { VendorForm } from '@/pages/Vendors/Form';
 import { GuestMiddleware } from '@/routes/GuestMiddleware';
 import { VendorsList } from '@/pages/Vendors/List';
 import { OrdersForm } from '@/pages/Orders/Form';
+import { OrdersList } from '@/pages/Orders/OrdersList';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -212,6 +213,7 @@ function App() {
                     </Route>
 
                     <Route path="orders">
+                      <Route path="" element={<OrdersList />} />
                       <Route path="new" element={<OrdersForm />}>
                         <Route path=":orderId" element={<OrdersForm />} />
                       </Route>

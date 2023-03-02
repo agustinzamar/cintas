@@ -23,23 +23,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    // ---- [ Auth ] ----
-    Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-    Route::get('/me', [AuthController::class, 'me'])->name('auth.me');
-
-    // ---- [ Provinces and Cities ] ----
-    Route::get('provinces', [ProvincesController::class, 'index']);
-    Route::get('cities', [CitiesController::class, 'index']);
-    Route::get('cities/{provinceId}', [CitiesController::class, 'getByProvince']);
-
-    // ---- [ Sizes ] ----
-    Route::apiResource('sizes', SizesController::class);
-
-    // ---- [ Requests ] ----
-    Route::apiResource('orders', OrdersController::class);
+    // Actions only allowed to the superadmin
+    Route::middleware('auth.superadmin')->group(function () {
+    });
 
     // Actions only allowed to the admins and superadmins
     Route::middleware('auth.admin')->group(function () {
+        // ---- [ Provinces and Cities ] ----
+        Route::get('provinces', [ProvincesController::class, 'index']);
+        Route::get('cities', [CitiesController::class, 'index']);
+        Route::get('cities/{provinceId}', [CitiesController::class, 'getByProvince']);
+
         // ---- [ Roles ] ----
         Route::get('roles', [RolesController::class, 'index']);
 
@@ -52,16 +46,31 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('companies/{company}/restore', [CompaniesController::class, 'restore']);
 
         // ---- [ Vendors ] ----
+        Route::post('vendors', [VendorsController::class, 'store']);
+        Route::get('vendors/{vendor}', [VendorsController::class, 'show']);
+        Route::put('vendors/{vendor}', [VendorsController::class, 'update']);
+        Route::delete('vendors/{vendor}', [VendorsController::class, 'destroy']);
+        Route::post('vendors/{vendor}/restore', [VendorsController::class, 'restore']);
         Route::apiResource('vendors', VendorsController::class);
-        Route::post('companies/{vendor}/restore', [VendorsController::class, 'restore']);
 
         // ---- [ Requests ] ----
-        Route::put('requests/{request}/updateStatus', [OrdersController::class, 'updateStatus']);
+        Route::put('orders/{order}/updateStatus', [OrdersController::class, 'updateStatus']);
     });
 
-    // Actions only allowed to the superadmin
-    Route::middleware('auth.superadmin')->group(function () {
-    });
+    // Actions allowed to all users
+
+    // ---- [ Auth ] ----
+    Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/me', [AuthController::class, 'me'])->name('auth.me');
+
+    // ---- [ Sizes ] ----
+    Route::apiResource('sizes', SizesController::class);
+
+    // ---- [ Orders ] ----
+    Route::apiResource('orders', OrdersController::class);
+
+    // ---- [ Vendors ] ----
+    Route::get('vendors', [VendorsController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');

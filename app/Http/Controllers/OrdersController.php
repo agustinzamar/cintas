@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
+use App\Enums\RoleEnum;
 use App\Http\Requests\Orders\StoreOrderRequest;
 use App\Http\Requests\Orders\UpdateOrderRequest;
 use App\Http\Requests\Orders\UpdateOrderStatusRequest;
@@ -16,6 +17,24 @@ class OrdersController extends Controller
 {
     public function index(): JsonResponse
     {
+        /** @var User $user */
+        $user = auth()->user();
+        $role = $user->role_id;
+
+        switch ($role) {
+            case RoleEnum::SUPERADMIN:
+            case RoleEnum::ADMINISTRATOR:
+                return new JsonResponse(Order::all(), Response::HTTP_OK);
+            case RoleEnum::WHAREHOUSE_MANAGER:
+                return new JsonResponse(Order::where('order_status_id', OrderStatusEnum::SUBMITTED)->get(), Response::HTTP_OK);
+            case RoleEnum::MANAGER:
+                $orders = Order::where([
+                    ['company_id', $user->company_id],
+                    ['order_status_id', OrderStatusEnum::DRAFT]
+                ])->get();
+                return new JsonResponse($orders, Response::HTTP_OK);
+        }
+
         return new JsonResponse(Order::all(), Response::HTTP_OK);
     }
 

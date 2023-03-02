@@ -10,5 +10,5 @@ class RoleEnum
 
     public const MANAGER = 3;
 
-    public const ORDER_CONTROLLER = 4;
+    public const WHAREHOUSE_MANAGER = 4;
 }

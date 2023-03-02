@@ -131,7 +131,7 @@ export const CreateOrderForm = ({ onAddItem }) => {
             control={control}
             name="size_range"
             labelText="Talles"
-            data={sizes}
+            data={sizes || []}
             required
             render={renderSizesDropdownOptions}
           />
