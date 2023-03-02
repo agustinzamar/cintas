@@ -28,10 +28,7 @@ class OrdersController extends Controller
             case RoleEnum::WHAREHOUSE_MANAGER:
                 return new JsonResponse(Order::where('order_status_id', OrderStatusEnum::SUBMITTED)->get(), Response::HTTP_OK);
             case RoleEnum::MANAGER:
-                $orders = Order::where([
-                    ['company_id', $user->company_id],
-                    ['order_status_id', OrderStatusEnum::DRAFT]
-                ])->get();
+                $orders = Order::where('company_id', $user->company_id)->whereIn('order_status_id', [OrderStatusEnum::DRAFT, OrderStatusEnum::CANCELLED])->get();
                 return new JsonResponse($orders, Response::HTTP_OK);
         }
 
