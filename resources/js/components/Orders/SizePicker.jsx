@@ -1,9 +1,17 @@
 import MuiBox from '@mui/material/Box';
 import { TextField } from '@/components/common/Inputs/TextField';
 import { CheckBox } from '@/components/common/Inputs/CheckBox';
+import { useEffect } from 'react';
 
-export const SizePicker = ({ control, watch, size }) => {
-  const value = watch(`size_${size}`);
+export const SizePicker = ({ control, watch, sizeNumber, reset }) => {
+  const checkboxName = `size_${sizeNumber}`;
+  const inputName = `quantity_${sizeNumber}`;
+
+  const checkboxValue = watch(checkboxName);
+
+  useEffect(() => {
+    reset(inputName);
+  }, [checkboxValue]);
 
   return (
     <MuiBox
@@ -16,18 +24,18 @@ export const SizePicker = ({ control, watch, size }) => {
     >
       <CheckBox
         control={control}
-        name={`size_${size}`}
-        labelText={String(size)}
+        name={checkboxName}
+        labelText={String(sizeNumber)}
         labelPlacement="end"
       />
       <TextField
         type="number"
         control={control}
-        name={`quantity_${size}`}
+        name={inputName}
         labelText="Cantidad"
         fullWidth={false}
         sx={{ marginLeft: '1rem' }}
-        disabled={!value}
+        disabled={!checkboxValue}
       />
     </MuiBox>
   );

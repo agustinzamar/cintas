@@ -12,13 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('order_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('request_status_id')->references('id')->on('request_statuses');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('company_id')->references('id')->on('companies');
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('order_statuses');
     }
 };

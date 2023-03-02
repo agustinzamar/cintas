@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Request;
+namespace App\Http\Requests\Orders;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequestStatusRequest extends FormRequest
+class UpdateOrderStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateRequestStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status_id' => ['required', 'integer', 'exists:statuses,id'],
+            'order_status_id' => ['required', 'integer', 'exists:statuses,id'],
         ];
     }
 }

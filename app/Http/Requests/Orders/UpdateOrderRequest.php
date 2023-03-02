@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Request;
+namespace App\Http\Requests\Orders;
 
-use App\Enums\RequestStatusEnum;
+use App\Enums\OrderStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRequestRequest extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,13 @@ class StoreRequestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'request_status_id' => ['required', 'integer', Rule::in(RequestStatusEnum::DRAFT, RequestStatusEnum::SUBMITTED)],
+            'order_status_id' => ['nullable', 'integer', Rule::in(OrderStatusEnum::DRAFT, OrderStatusEnum::SUBMITTED)],
             'items' => ['required', 'array'],
-            'items.*.product_name' => ['required', 'string'],
-            'items.*.product_code' => ['required', 'string'],
-            'items.*.product_color' => ['required', 'string'],
-            'items.*.product_size' => ['required', 'string'],
+            'items.*.id' => ['nullable', 'integer', 'exists:request_items,id'],
+            'items.*.name' => ['nullable', 'string'],
+            'items.*.code' => ['required', 'string'],
+            'items.*.color' => ['required', 'string'],
+            'items.*.size' => ['required', 'string'],
             'items.*.quantity' => ['required', 'integer'],
             'items.*.additional_information' => ['nullable', 'string'],
         ];

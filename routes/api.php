@@ -3,8 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProvincesController;
-use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SizesController;
 use App\Http\Controllers\UsersController;
@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('sizes', SizesController::class);
 
     // ---- [ Requests ] ----
-    Route::apiResource('requests', RequestsController::class);
+    Route::apiResource('orders', OrdersController::class);
 
     // Actions only allowed to the admins and superadmins
     Route::middleware('auth.admin')->group(function () {
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('companies/{vendor}/restore', [VendorsController::class, 'restore']);
 
         // ---- [ Requests ] ----
-        Route::put('requests/{request}/updateStatus', [RequestsController::class, 'updateStatus']);
+        Route::put('requests/{request}/updateStatus', [OrdersController::class, 'updateStatus']);
     });
 
     // Actions only allowed to the superadmin

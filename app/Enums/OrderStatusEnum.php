@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-class RequestStatusEnum
+class OrderStatusEnum
 {
     public const DRAFT = 1;
     public const SUBMITTED = 2;

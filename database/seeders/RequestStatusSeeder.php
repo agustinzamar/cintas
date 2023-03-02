@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\RequestStatus;
+use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 
 class RequestStatusSeeder extends Seeder
@@ -14,7 +14,7 @@ class RequestStatusSeeder extends Seeder
      */
     public function run()
     {
-        RequestStatus::insert([
+        OrderStatus::insert([
             [
                 'name' => 'draft',
                 'description' => 'El pedido aun no hay sido enviado.',
