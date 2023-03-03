@@ -15,6 +15,7 @@ import MuiSelect from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { Cancel } from '@/components/common/Buttons/Cancel';
 
 export const OrdersForm = () => {
   const { auth: user } = useAuth();
@@ -60,13 +61,7 @@ export const OrdersForm = () => {
       <NewOrderTable items={items} onDeleteItem={setItems} />
 
       <Box sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center' }}>
-        <Button
-          variant="outlined"
-          sx={{ marginRight: '1rem' }}
-          onClick={() => navigate(-1)}
-        >
-          Cancelar
-        </Button>
+        <Cancel />
         <Button
           variant="contained"
           sx={{ marginRight: '1rem' }}

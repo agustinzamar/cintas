@@ -45,6 +45,12 @@ const theme = createTheme({
       dark: '#ad1a40',
       contrastText: '#ffffff',
     },
+    cancel: {
+      main: '#DADADA',
+      light: '#c9c9c9',
+      dark: '#c0c0c0',
+      contrastText: '#000000',
+    },
     background: {
       default: '#ffffff',
       paper: '#ffffff',

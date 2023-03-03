@@ -14,6 +14,7 @@ import { Select } from '@/components/common/Inputs/Select';
 import { TextField } from '@/components/common/Inputs/TextField';
 import { RoleEnum } from '@/enums/RoleEnum';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
+import { Cancel } from '@/components/common/Buttons/Cancel';
 
 export const UserForm = () => {
   const { userId } = useParams();
@@ -115,13 +116,7 @@ export const UserForm = () => {
           </Grid>
         )}
         <Grid item xs={12}>
-          <Button
-            variant="outlined"
-            sx={{ marginRight: '1rem' }}
-            onClick={() => navigate(-1)}
-          >
-            Cancelar
-          </Button>
+          <Cancel />
           <Button variant="contained" type="submit">
             {title}
           </Button>
