@@ -105,7 +105,9 @@ export const TableContent = props => {
         }}
       >
         <img src={EmptyData} alt="No hay datos" style={{ margin: 'auto' }} />
-        <Typography variant="h2">Aun no hay nada por aqui</Typography>
+        <Typography variant="h2" sx={{ textAlign: 'center' }}>
+          Aun no hay nada por aqui
+        </Typography>
       </Box>
     );
 

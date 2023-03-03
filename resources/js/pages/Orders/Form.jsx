@@ -63,7 +63,7 @@ export const OrdersForm = () => {
       <Box sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center' }}>
         <Cancel />
         <Button
-          variant="contained"
+          variant="outlined"
           sx={{ marginRight: '1rem' }}
           onClick={() => onSubmit(OrderStatusEnum.DRAFT)}
         >
