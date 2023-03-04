@@ -1,20 +1,17 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Copyright } from '@/components/Copyright';
 import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 
-export function LoginForm() {
+export function RecoverAccount() {
   const { register, handleSubmit } = useForm();
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -25,7 +22,11 @@ export function LoginForm() {
       .then(() => {
         navigate(state?.path || '/');
       })
-      .catch(() => toast.error('Usuario o contraseña incorrecta'));
+      .catch(() =>
+        toast.error(
+          'El email no existe en el sistema, pongase en contacto con el administrador.'
+        )
+      );
   };
 
   return (
@@ -69,9 +70,6 @@ export function LoginForm() {
         }}
       >
         <img src={logo} alt="Logo" width="250" />
-        {/* <Typography component="h1" variant="h5">
-          Sign in
-        </Typography> */}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -82,26 +80,13 @@ export function LoginForm() {
             autoFocus
             {...register('email', { required: true })}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            label="Contraseña"
-            type="password"
-            autoComplete="current-password"
-            {...register('password', { required: true })}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recordarme"
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Ingresar
+            Recuperar contraseña
           </Button>
           <Grid
             container
@@ -113,8 +98,8 @@ export function LoginForm() {
             }}
           >
             <Grid item xs>
-              <Link to="/recovery">
-                ¿Olvidaste tu contraseña? Click aqui. 👈
+              <Link to="/login" variant="body2">
+                Iniciar sesion
               </Link>
             </Grid>
           </Grid>

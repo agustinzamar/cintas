@@ -13,6 +13,7 @@ import { useGetCompany } from '@/hooks/companies/useGetCompany';
 import { Select } from '@/components/common/Inputs/Select';
 import { useGetProvinces } from '@/hooks/address/useGetProvinces';
 import { useGetCitiesByProvince } from '@/hooks/address/useGetCitiesByProvince';
+import { Cancel } from '@/components/common/Buttons/Cancel';
 
 export const BranchForm = () => {
   const { companyId } = useParams();
@@ -66,7 +67,7 @@ export const BranchForm = () => {
         <Grid item xs={12}>
           <Title>{title}</Title>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <TextField
             control={control}
             labelText="Nombre de la sucursal"
@@ -74,7 +75,6 @@ export const BranchForm = () => {
             required
           />
         </Grid>
-        <Grid item xs={6} />
         <Grid item xs={6}>
           <Select
             control={control}
@@ -104,13 +104,7 @@ export const BranchForm = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button
-            variant="outlined"
-            sx={{ marginRight: '1rem' }}
-            onClick={() => navigate(-1)}
-          >
-            Cancelar
-          </Button>
+          <Cancel />
           <Button variant="contained" type="submit">
             {title}
           </Button>

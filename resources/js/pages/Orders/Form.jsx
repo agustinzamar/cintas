@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useGetOrder } from '@/hooks/orders/useGetOrder';
+import { Cancel } from '@/components/common/Buttons/Cancel';
 
 export const OrdersForm = () => {
   const queryClient = useQueryClient();
@@ -75,16 +76,9 @@ export const OrdersForm = () => {
       <NewOrderTable items={items} onDeleteItem={setItems} />
 
       <Box sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center' }}>
+        <Cancel />
         <Button
           variant="outlined"
-          sx={{ marginRight: '1rem' }}
-          component={Link}
-          to="/orders"
-        >
-          Volver
-        </Button>
-        <Button
-          variant="contained"
           sx={{ marginRight: '1rem' }}
           onClick={() => onSubmit(OrderStatusEnum.DRAFT)}
         >

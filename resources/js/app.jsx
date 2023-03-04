@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import { createTheme, ThemeProvider } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 import { LoginPage } from '@/pages/Login';
+import { RecoverPage } from '@/pages/RecoverAccount';
 import { Index as AuthenticatedLayout } from '@/layouts/Authenticated';
 import { Index as GuestLayout } from '@/layouts/Guest';
 import { Dashboard } from '@/pages/Dashboard';
@@ -43,6 +44,12 @@ const theme = createTheme({
       light: '#f34772',
       dark: '#ad1a40',
       contrastText: '#ffffff',
+    },
+    cancel: {
+      main: '#DADADA',
+      light: '#c9c9c9',
+      dark: '#c0c0c0',
+      contrastText: '#000000',
     },
     background: {
       default: '#ffffff',
@@ -183,6 +190,7 @@ function App() {
                 <Route element={<GuestMiddleware />}>
                   <Route element={<GuestLayout />}>
                     <Route exact path="login" element={<LoginPage />} />
+                    <Route path="recovery" element={<RecoverPage />} />
                   </Route>
                 </Route>
 
