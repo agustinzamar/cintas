@@ -25,6 +25,13 @@ class OrdersApi {
     const response = await axiosIntance.delete(`/orders/${id}`);
     return response.data;
   }
+
+  async updateStatus(id, statusId) {
+    const response = await axiosIntance.put(`/orders/${id}/updateStatus`, {
+      order_status_id: statusId,
+    });
+    return response.data;
+  }
 }
 
 export default new OrdersApi();

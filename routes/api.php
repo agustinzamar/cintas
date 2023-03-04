@@ -52,9 +52,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('vendors/{vendor}', [VendorsController::class, 'destroy']);
         Route::post('vendors/{vendor}/restore', [VendorsController::class, 'restore']);
         Route::apiResource('vendors', VendorsController::class);
-
-        // ---- [ Requests ] ----
-        Route::put('orders/{order}/updateStatus', [OrdersController::class, 'updateStatus']);
     });
 
     // Actions allowed to all users
@@ -68,6 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // ---- [ Orders ] ----
     Route::apiResource('orders', OrdersController::class);
+    Route::put('orders/{order}/updateStatus', [OrdersController::class, 'updateStatus']);
 
     // ---- [ Vendors ] ----
     Route::get('vendors', [VendorsController::class, 'index']);

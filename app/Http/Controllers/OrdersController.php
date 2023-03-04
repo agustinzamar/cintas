@@ -116,7 +116,6 @@ class OrdersController extends Controller
         $requestItems = [];
         foreach ($items as $item) {
             $item['order_id'] = $orderId;
-            $item['name'] = '';
             $requestItems[] = OrderItem::create($item);
         }
         return $requestItems;

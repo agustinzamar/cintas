@@ -35,6 +35,7 @@ class StoreOrderRequest extends FormRequest
             'items.*.size' => ['required', 'string'],
             'items.*.quantity' => ['required', 'integer'],
             'items.*.additional_information' => ['nullable', 'string'],
+            'items.*.vendor_id' => ['required', 'integer', 'exists:vendors,id'],
         ];
     }
 }
