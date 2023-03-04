@@ -190,7 +190,11 @@ function App() {
                 <Route element={<GuestMiddleware />}>
                   <Route element={<GuestLayout />}>
                     <Route exact path="login" element={<LoginPage />} />
-                    <Route path="recovery" element={<RecoverPage />} />
+                    <Route
+                      exact
+                      path="password-reset"
+                      element={<RecoverPage />}
+                    />
                   </Route>
                 </Route>
 

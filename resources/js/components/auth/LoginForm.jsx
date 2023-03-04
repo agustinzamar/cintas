@@ -7,12 +7,11 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Copyright } from '@/components/Copyright';
 import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();
@@ -113,7 +112,7 @@ export function LoginForm() {
             }}
           >
             <Grid item xs>
-              <Link to="/recovery">
+              <Link to="/password-reset">
                 ¿Olvidaste tu contraseña? Click aqui. 👈
               </Link>
             </Grid>
