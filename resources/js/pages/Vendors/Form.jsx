@@ -10,7 +10,7 @@ import { useGetVendor } from '@/hooks/vendors/useGetVendor';
 import { toast } from 'react-toastify';
 import VendorsApi from '@/api/VendorsApi';
 import { useEffect } from 'react';
-import { Cancel } from '@/components/common/Buttons/Cancel';
+import { CancelButton } from '@/components/common/Buttons/CancelButton';
 
 export const VendorForm = () => {
   const { vendorId } = useParams();
@@ -81,7 +81,7 @@ export const VendorForm = () => {
           <TextField control={control} name="address" labelText="Dirección" />
         </Grid>
         <Grid item xs={12}>
-          <Cancel />
+          <CancelButton />
           <Button variant="contained" type="submit">
             {title}
           </Button>

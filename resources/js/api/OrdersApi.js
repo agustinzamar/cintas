@@ -26,10 +26,13 @@ class OrdersApi {
     return response.data;
   }
 
-  async updateStatus(id, statusId) {
-    const response = await axiosIntance.put(`/orders/${id}/updateStatus`, {
-      order_status_id: statusId,
-    });
+  async updateStatus(payload) {
+    const response = await axiosIntance.put(
+      `/orders/${payload.orderId}/updateStatus`,
+      {
+        order_status_id: payload.orderStatusId,
+      }
+    );
     return response.data;
   }
 }

@@ -5,7 +5,6 @@ import VendorsApi from '@/api/VendorsApi';
 export const useGetVendor = id => {
   const queryClient = useQueryClient();
   const { data } = useQuery({
-    cacheTime: 1,
     queryKey: ['vendor'],
     queryFn: async () => {
       if (id) {

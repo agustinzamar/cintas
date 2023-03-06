@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import { Box } from '@/components/common/Box';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NewOrderTable } from '@/components/Table/Orders/NewOrderTable';
 import { useEffect, useState } from 'react';
 import { CreateOrderForm } from '@/components/Orders/CreateOrderForm';
@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useGetOrder } from '@/hooks/orders/useGetOrder';
-import { Cancel } from '@/components/common/Buttons/Cancel';
+import { CancelButton } from '@/components/common/Buttons/CancelButton';
 
 export const OrdersForm = () => {
   const queryClient = useQueryClient();
@@ -34,6 +34,10 @@ export const OrdersForm = () => {
   const isLoading = isLoadingOrder || isLoadingMutate;
 
   useEffect(() => {
+    if (existingOrder && existingOrder.status?.id !== OrderStatusEnum.DRAFT) {
+      navigate(`/orders/view/${existingOrder.id}`);
+    }
+
     setCompanyId(existingOrder?.company?.id);
   }, [existingOrder]);
 
@@ -57,9 +61,7 @@ export const OrdersForm = () => {
 
         queryClient.invalidateQueries(['order']);
 
-        if (data.order_status_id === OrderStatusEnum.DRAFT) {
-          navigate('/orders');
-        }
+        navigate('/orders');
       },
       onError: () => toast.error('Lo sentimos, algo salió mal'),
     });
@@ -76,7 +78,7 @@ export const OrdersForm = () => {
       <NewOrderTable items={items} onDeleteItem={setItems} />
 
       <Box sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center' }}>
-        <Cancel />
+        <CancelButton />
         <Button
           variant="outlined"
           sx={{ marginRight: '1rem' }}
