@@ -5,7 +5,6 @@ import CompaniesApi from '@/api/CompaniesApi';
 export const useGetCompany = id => {
   const queryClient = useQueryClient();
   const { data } = useQuery({
-    cacheTime: 1,
     queryKey: ['company'],
     queryFn: async () => {
       if (id) {

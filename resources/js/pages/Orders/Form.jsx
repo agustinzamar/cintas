@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
 import { Box } from '@/components/common/Box';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NewOrderTable } from '@/components/Table/Orders/NewOrderTable';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CreateOrderForm } from '@/components/Orders/CreateOrderForm';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { Loader } from '@/components/common/Loader';
 import { OrderStatusEnum } from '@/enums/OrderStatusEnum';
 import { toast } from 'react-toastify';
@@ -15,21 +15,38 @@ import MuiSelect from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { Cancel } from '@/components/common/Buttons/Cancel';
+import { useGetOrder } from '@/hooks/orders/useGetOrder';
+import { CancelButton } from '@/components/common/Buttons/CancelButton';
 
 export const OrdersForm = () => {
-  const { auth: user } = useAuth();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { orderId } = useParams();
+  const { data: existingOrder, isLoading: isLoadingOrder } =
+    useGetOrder(orderId);
+  const { auth: user } = useAuth();
   const [items, setItems] = useState([]);
-  const { mutate, isLoading } = useMutation(OrdersApi.create);
+  const { mutate, isLoading: isLoadingMutate } = useMutation(
+    existingOrder ? OrdersApi.update : OrdersApi.create
+  );
   const { data: companies } = useGetAllCompanies();
   const [companyId, setCompanyId] = useState(null);
+  const isLoading = isLoadingOrder || isLoadingMutate;
+
+  useEffect(() => {
+    if (existingOrder && existingOrder.status?.id !== OrderStatusEnum.DRAFT) {
+      navigate(`/orders/view/${existingOrder.id}`);
+    }
+
+    setCompanyId(existingOrder?.company?.id);
+  }, [existingOrder]);
 
   const onSubmit = statusId => {
     const data = {
       items,
       order_status_id: statusId,
       company_id: companyId,
+      id: existingOrder?.id,
     };
 
     mutate(data, {
@@ -42,9 +59,9 @@ export const OrdersForm = () => {
         setItems(() => []);
         setCompanyId(() => null);
 
-        if (data.order_status_id === OrderStatusEnum.DRAFT) {
-          navigate('/orders');
-        }
+        queryClient.invalidateQueries(['order']);
+
+        navigate('/orders');
       },
       onError: () => toast.error('Lo sentimos, algo salió mal'),
     });
@@ -56,12 +73,12 @@ export const OrdersForm = () => {
 
   return (
     <>
-      <CreateOrderForm onAddItem={setItems} />
+      <CreateOrderForm onAddItem={setItems} existingOrder={existingOrder} />
 
       <NewOrderTable items={items} onDeleteItem={setItems} />
 
       <Box sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center' }}>
-        <Cancel />
+        <CancelButton />
         <Button
           variant="outlined"
           sx={{ marginRight: '1rem' }}

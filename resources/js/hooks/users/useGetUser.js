@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 export const useGetUser = id => {
   const queryClient = useQueryClient();
   const { data } = useQuery({
-    cacheTime: 1,
     queryKey: ['user'],
     queryFn: async () => {
       if (id) {

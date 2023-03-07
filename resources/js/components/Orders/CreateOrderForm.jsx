@@ -22,7 +22,7 @@ function renderSizesDropdownOptions(data = []) {
   });
 }
 
-export const CreateOrderForm = ({ onAddItem }) => {
+export const CreateOrderForm = ({ onAddItem, existingOrder }) => {
   const { data: vendors, isLoading: isLoadingVendors } = useGetAllVendors();
   const { data: sizes, isLoading: isLoadingSizes } = useGetAllSizes();
   const { handleSubmit, control, reset, watch, resetField } = useForm();
@@ -30,6 +30,16 @@ export const CreateOrderForm = ({ onAddItem }) => {
   const [selectedSizeRange, setSelectedSizeRange] = useState(null);
   const isLoading = isLoadingVendors || isLoadingSizes;
   const title = 'Crear pedido';
+
+  useEffect(() => {
+    if (existingOrder) {
+      const mappedItems = existingOrder.items.map(item => ({
+        ...item,
+        vendor_name: item.vendor?.name,
+      }));
+      onAddItem(mappedItems);
+    }
+  }, [existingOrder]);
 
   useEffect(() => {
     if (sizes && sizeRange) {

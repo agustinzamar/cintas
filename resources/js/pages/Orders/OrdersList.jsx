@@ -1,16 +1,22 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useAuth } from '@/hooks/useAuth';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
-import { Title } from '@/components/common/Title';
 import MuiBox from '@mui/material/Box';
 import { OrdersTable } from '@/components/Table/Orders/OrdersTable';
 import { RoleEnum } from '@/enums/RoleEnum';
+import { useQueryClient } from 'react-query';
+import { useEffect } from 'react';
 
 export const OrdersList = () => {
   const { auth: user } = useAuth();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.removeQueries(['order']);
+  }, []);
 
   return (
     <Box>
@@ -27,10 +33,10 @@ export const OrdersList = () => {
               Nuevo pedido
             </Button>
             {user.role?.id === RoleEnum.MANAGER && (
-              <Title>
-                Solo se visualizan los pedidos pendientes de envío
+              <Typography>
+                Solo se visualizan los pedidos pendientes de envío o cancelados
                 correspondientes a la sucursal "{user.company?.name}"
-              </Title>
+              </Typography>
             )}
           </MuiBox>
         </Grid>

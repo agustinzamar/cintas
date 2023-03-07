@@ -13,7 +13,7 @@ import { useGetCompany } from '@/hooks/companies/useGetCompany';
 import { Select } from '@/components/common/Inputs/Select';
 import { useGetProvinces } from '@/hooks/address/useGetProvinces';
 import { useGetCitiesByProvince } from '@/hooks/address/useGetCitiesByProvince';
-import { Cancel } from '@/components/common/Buttons/Cancel';
+import { CancelButton } from '@/components/common/Buttons/CancelButton';
 
 export const BranchForm = () => {
   const { companyId } = useParams();
@@ -104,7 +104,7 @@ export const BranchForm = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Cancel />
+          <CancelButton />
           <Button variant="contained" type="submit">
             {title}
           </Button>

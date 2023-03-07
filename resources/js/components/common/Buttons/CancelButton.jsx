@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-export const Cancel = () => {
+export const CancelButton = () => {
   const navigate = useNavigate();
   return (
     <Button
@@ -10,7 +10,7 @@ export const Cancel = () => {
       sx={{ marginRight: '1rem' }}
       onClick={() => navigate(-1)}
     >
-      Cancelar
+      Volver
     </Button>
   );
 };

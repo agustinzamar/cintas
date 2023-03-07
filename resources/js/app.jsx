@@ -25,6 +25,7 @@ import { VendorsList } from '@/pages/Vendors/List';
 import { OrdersForm } from '@/pages/Orders/Form';
 import { OrdersList } from '@/pages/Orders/OrdersList';
 import { PageNotFound } from '@/pages/404';
+import { Order } from '@/pages/Orders/Order';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -191,7 +192,11 @@ function App() {
                 <Route element={<GuestMiddleware />}>
                   <Route element={<GuestLayout />}>
                     <Route exact path="login" element={<LoginPage />} />
-                    <Route path="recovery" element={<RecoverPage />} />
+                    <Route
+                      exact
+                      path="password-reset"
+                      element={<RecoverPage />}
+                    />
                   </Route>
                 </Route>
 
@@ -223,6 +228,7 @@ function App() {
 
                     <Route path="orders">
                       <Route path="" element={<OrdersList />} />
+                      <Route path="view/:orderId" element={<Order />} />
                       <Route path="new" element={<OrdersForm />}>
                         <Route path=":orderId" element={<OrdersForm />} />
                       </Route>

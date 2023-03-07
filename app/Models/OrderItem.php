@@ -10,7 +10,10 @@ class OrderItem extends Model
 {
     use HasFactory;
 
+    protected $with = ['vendor'];
+
     protected $fillable = [
+        'vendor_id',
         'order_id',
         'name',
         'code',
@@ -20,8 +23,14 @@ class OrderItem extends Model
         'additional_information',
     ];
 
-    public function request(): BelongsTo
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function vendor(): BelongsTo
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
 }
