@@ -50,23 +50,27 @@ export const Order = ({ order }) => {
           <Text>Fecha: {order.created_at}</Text>
         </View>
 
-        {order.items?.map(item => {
-          return (
-            <View style={styles.view} key={item.id} wrap={false}>
-              <Text style={styles.text}>Proveedor: {item.vendor?.name}</Text>
-              <Text style={styles.text}>
-                Artículo: {item.code} Color: {item.color} Talle: {item.size}
-              </Text>
-              <Text style={styles.text}>Pares: {item.quantity}</Text>
-              {item.additional_information && (
-                <>
-                  <Text style={styles.text}>Observaciones:</Text>
-                  <Text style={styles.text}>{item.additional_information}</Text>
-                </>
-              )}
-            </View>
-          );
-        })}
+        <View style={{ marginTop: 0, marginBottom: 'auto' }}>
+          {order.items?.map(item => {
+            return (
+              <View style={styles.view} key={item.id} wrap={false}>
+                <Text style={styles.text}>Proveedor: {item.vendor?.name}</Text>
+                <Text style={styles.text}>
+                  Artículo: {item.code} Color: {item.color} Talle: {item.size}
+                </Text>
+                <Text style={styles.text}>Pares: {item.quantity}</Text>
+                {item.additional_information && (
+                  <>
+                    <Text style={styles.text}>Observaciones:</Text>
+                    <Text style={styles.text}>
+                      {item.additional_information}
+                    </Text>
+                  </>
+                )}
+              </View>
+            );
+          })}
+        </View>
 
         <Text
           style={styles.footer}
