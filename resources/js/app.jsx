@@ -24,6 +24,7 @@ import { GuestMiddleware } from '@/routes/GuestMiddleware';
 import { VendorsList } from '@/pages/Vendors/List';
 import { OrdersForm } from '@/pages/Orders/Form';
 import { OrdersList } from '@/pages/Orders/OrdersList';
+import { PageNotFound } from '@/pages/404';
 import { Order } from '@/pages/Orders/Order';
 
 const element = document.getElementById('app');
@@ -235,7 +236,7 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route path="*" element={<h1>404</h1>} />
+                <Route path="*" element={<PageNotFound />} />
               </Routes>
             </Router>
           </ThemeProvider>
