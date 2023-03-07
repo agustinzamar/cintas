@@ -33,6 +33,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
+    "@react-pdf/renderer": "^3.1.7",
     "currency.js": "^2.0.4",
     "react-hook-form": "^7.39.1",
     "react-query": "^3.39.2",

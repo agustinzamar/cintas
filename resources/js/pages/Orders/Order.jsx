@@ -1,3 +1,4 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
 import { Box } from '@/components/common/Box';
 import { SubTitle } from '@/components/common/SubTitle';
@@ -14,6 +15,8 @@ import OrdersApi from '@/api/OrdersApi';
 import { toast } from 'react-toastify';
 import { useAuth } from '@/hooks/useAuth';
 import { RoleEnum } from '@/enums/RoleEnum';
+import { Order as OrderPdf } from '@/components/pdf/Order';
+import PrintIcon from '@mui/icons-material/Print';
 
 export const Order = () => {
   const { auth: user } = useAuth();
@@ -106,9 +109,27 @@ export const Order = () => {
           <Button
             variant="contained"
             onClick={() => handleSubmit(OrderStatusEnum.APPROVED)}
+            sx={{ marginRight: '1rem' }}
           >
             Aprobar
           </Button>
+
+          <PDFDownloadLink
+            document={<OrderPdf order={order} />}
+            fileName={`Pedido #${orderId} - ${order?.company?.name}`}
+          >
+            {({ loading }) => (
+              <Button
+                onClick={() => {}}
+                startIcon={<PrintIcon />}
+                variant="outlined"
+                sx={{ textDecoration: 'none' }}
+                disabled={loading}
+              >
+                Imprimir
+              </Button>
+            )}
+          </PDFDownloadLink>
         </Box>
       )}
     </>

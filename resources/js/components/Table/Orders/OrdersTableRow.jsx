@@ -10,6 +10,8 @@ import { DeleteButton } from '@/components/common/IconButtons/DeleteButton';
 import { useMutation, useQueryClient } from 'react-query';
 import OrdersApi from '@/api/OrdersApi';
 import { toast } from 'react-toastify';
+import { Order as OrderPdf } from '@/components/pdf/Order';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 export const OrdersTableRow = ({ data: order }) => {
   const navigate = useNavigate();
@@ -21,8 +23,6 @@ export const OrdersTableRow = ({ data: order }) => {
   const isWarehouseManager = roleId === RoleEnum.WAREHOUSE_MANAGER;
   const { mutate } = useMutation(OrdersApi.delete);
   const queryClient = useQueryClient();
-
-  const handlePrint = () => {};
 
   const handleDelete = id => {
     mutate(id, {
@@ -59,11 +59,18 @@ export const OrdersTableRow = ({ data: order }) => {
 
         {(isWarehouseManager || isAdmin) &&
           order.status?.id !== OrderStatusEnum.DRAFT && (
-          <PrintButton
-            onClick={handlePrint}
-            tooltipText="Imprimir pedido"
-            disabled={order.status?.id === OrderStatusEnum.DRAFT}
-          />
+          <PDFDownloadLink
+            document={<OrderPdf order={order} />}
+            fileName={`Pedido #${order.id} - ${order?.company?.name}`}
+          >
+            {({ loading }) => (
+              <PrintButton
+                onClick={() => {}}
+                tooltipText="Imprimir pedido"
+                disabled={loading}
+              />
+            )}
+          </PDFDownloadLink>
         )}
 
         {order.status?.id === OrderStatusEnum.DRAFT && (
