@@ -10,12 +10,24 @@ import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
 
 export function RecoverAccount() {
-  const { register, handleSubmit } = useForm();
-  const { login } = useAuth();
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .required('Campo email requerido')
+      .email('Error de formato en el email'),
+  });
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(schema),
+  });
   const navigate = useNavigate();
+  const { login } = useAuth();
   const { state } = useLocation();
+  const { errors } = formState;
 
   const onSubmit = data => {
     login(data)
@@ -28,6 +40,15 @@ export function RecoverAccount() {
         )
       );
   };
+
+  const showErrors = error => {
+    toast.error(errors[error]?.message);
+  };
+
+  useEffect(() => {
+    let err = Object.keys(errors);
+    if (err.length > 0) err.map(e => showErrors(e));
+  }, [errors]);
 
   return (
     <Container
