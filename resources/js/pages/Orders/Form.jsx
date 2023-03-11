@@ -17,6 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useGetOrder } from '@/hooks/orders/useGetOrder';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const OrdersForm = () => {
   const queryClient = useQueryClient();
@@ -63,7 +64,10 @@ export const OrdersForm = () => {
 
         navigate('/orders');
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al crear el pedido')
+        ),
     });
   };
 

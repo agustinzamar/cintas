@@ -17,6 +17,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { RoleEnum } from '@/enums/RoleEnum';
 import { Order as OrderPdf } from '@/components/pdf/Order';
 import PrintIcon from '@mui/icons-material/Print';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const Order = () => {
   const { auth: user } = useAuth();
@@ -46,7 +47,10 @@ export const Order = () => {
         );
         queryClient.invalidateQueries(['order']);
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al procesar el pedido')
+        ),
     });
   };
 

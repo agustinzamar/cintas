@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import VendorsApi from '@/api/VendorsApi';
 import { useEffect } from 'react';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const VendorForm = () => {
   const { vendorId } = useParams();
@@ -40,7 +41,10 @@ export const VendorForm = () => {
           navigate(-1);
         }
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al crear el proveedor')
+        ),
     });
   };
 

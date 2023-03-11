@@ -14,6 +14,7 @@ import { Select } from '@/components/common/Inputs/Select';
 import { useGetProvinces } from '@/hooks/address/useGetProvinces';
 import { useGetCitiesByProvince } from '@/hooks/address/useGetCitiesByProvince';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const BranchForm = () => {
   const { companyId } = useParams();
@@ -50,7 +51,10 @@ export const BranchForm = () => {
           navigate(-1);
         }
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al crear la sucursal')
+        ),
     });
   };
 

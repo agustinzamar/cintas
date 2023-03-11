@@ -12,6 +12,7 @@ import OrdersApi from '@/api/OrdersApi';
 import { toast } from 'react-toastify';
 import { Order as OrderPdf } from '@/components/pdf/Order';
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const OrdersTableRow = ({ data: order }) => {
   const navigate = useNavigate();
@@ -27,10 +28,13 @@ export const OrdersTableRow = ({ data: order }) => {
   const handleDelete = id => {
     mutate(id, {
       onSuccess: () => {
-        toast.success('Pedido cancelado exitosamente.');
+        toast.success('Borrador eliminado exitosamente.');
         queryClient.invalidateQueries('orders');
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al eliminar el borrador')
+        ),
     });
   };
 

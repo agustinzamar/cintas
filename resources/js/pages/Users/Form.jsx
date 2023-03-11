@@ -15,6 +15,7 @@ import { TextField } from '@/components/common/Inputs/TextField';
 import { RoleEnum } from '@/enums/RoleEnum';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
+import { parseBackendErrors } from '@/utils/validations';
 
 export const UserForm = () => {
   const { userId } = useParams();
@@ -56,7 +57,10 @@ export const UserForm = () => {
           navigate(-1);
         }
       },
-      onError: () => toast.error('Lo sentimos, algo salió mal'),
+      onError: err =>
+        toast.error(
+          parseBackendErrors(err, 'Hubo un error al crear el usuario')
+        ),
     });
   };
 
