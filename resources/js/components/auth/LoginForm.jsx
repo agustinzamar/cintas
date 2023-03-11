@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
+import { parseBackendErrors } from '@/utils/validations';
 
 export function LoginForm() {
   const schema = yup.object().shape({
@@ -35,9 +36,11 @@ export function LoginForm() {
   const onSubmit = data => {
     login(data)
       .then(() => {
-        navigate(state?.path || '/');
+        navigate(state?.path || '');
       })
-      .catch(() => toast.error('Usuario o contraseña incorrecta'));
+      .catch(err =>
+        toast.error(parseBackendErrors(err, 'Error al iniciar sesión'))
+      );
   };
 
   const showErrors = error => {

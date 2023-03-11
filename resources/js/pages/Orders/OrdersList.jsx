@@ -9,6 +9,7 @@ import { OrdersTable } from '@/components/Table/Orders/OrdersTable';
 import { RoleEnum } from '@/enums/RoleEnum';
 import { useQueryClient } from 'react-query';
 import { useEffect } from 'react';
+import Title from '@/components/common/Title';
 
 export const OrdersList = () => {
   const { auth: user } = useAuth();
@@ -23,15 +24,19 @@ export const OrdersList = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <MuiBox display="flex" alignItems="baseline">
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              component={Link}
-              to="/orders/new"
-              sx={{ marginRight: '1rem' }}
-            >
-              Nuevo pedido
-            </Button>
+            {user.role?.id === RoleEnum.WAREHOUSE_MANAGER ? (
+              <Title>Pedidos pendientes</Title>
+            ) : (
+              <Button
+                variant="contained"
+                startIcon={<AddIcon />}
+                component={Link}
+                to="/orders/new"
+                sx={{ marginRight: '1rem' }}
+              >
+                Nuevo pedido
+              </Button>
+            )}
             {user.role?.id === RoleEnum.MANAGER && (
               <Typography>
                 Solo se visualizan los pedidos pendientes de envío o cancelados

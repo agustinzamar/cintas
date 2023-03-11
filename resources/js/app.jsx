@@ -26,6 +26,8 @@ import { OrdersForm } from '@/pages/Orders/Form';
 import { OrdersList } from '@/pages/Orders/OrdersList';
 import { PageNotFound } from '@/pages/404';
 import { Order } from '@/pages/Orders/Order';
+import { AdminMiddleware } from '@/routes/AdminMiddleware';
+import { ManagerMiddleware } from '@/routes/ManagerMiddleware';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -203,34 +205,40 @@ function App() {
                 {/*Protected routes*/}
                 <Route element={<AuthMiddleware />}>
                   <Route element={<AuthenticatedLayout />}>
-                    <Route exact path="" element={<Dashboard />} />
+                    <Route element={<AdminMiddleware />}>
+                      <Route exact path="" element={<Dashboard />} />
 
-                    <Route path="users">
-                      <Route path="" element={<UsersList />} />
-                      <Route path="add" element={<UserForm />}>
-                        <Route path=":userId" element={<UserForm />} />
+                      <Route path="users">
+                        <Route path="" element={<UsersList />} />
+                        <Route path="add" element={<UserForm />}>
+                          <Route path=":userId" element={<UserForm />} />
+                        </Route>
                       </Route>
-                    </Route>
 
-                    <Route path="branches">
-                      <Route path="" element={<BranchsList />} />
-                      <Route path="add" element={<BranchForm />}>
-                        <Route path=":companyId" element={<BranchForm />} />
+                      <Route path="branches">
+                        <Route path="" element={<BranchsList />} />
+                        <Route path="add" element={<BranchForm />}>
+                          <Route path=":companyId" element={<BranchForm />} />
+                        </Route>
                       </Route>
-                    </Route>
 
-                    <Route path="vendors">
-                      <Route path="" element={<VendorsList />} />
-                      <Route path="add" element={<VendorForm />}>
-                        <Route path=":vendorId" element={<VendorForm />} />
+                      <Route path="vendors">
+                        <Route path="" element={<VendorsList />} />
+                        <Route path="add" element={<VendorForm />}>
+                          <Route path=":vendorId" element={<VendorForm />} />
+                        </Route>
                       </Route>
                     </Route>
 
                     <Route path="orders">
                       <Route path="" element={<OrdersList />} />
                       <Route path="view/:orderId" element={<Order />} />
-                      <Route path="new" element={<OrdersForm />}>
-                        <Route path=":orderId" element={<OrdersForm />} />
+
+                      {/*Only managers and admins can create new orders*/}
+                      <Route element={<ManagerMiddleware />}>
+                        <Route path="new" element={<OrdersForm />}>
+                          <Route path=":orderId" element={<OrdersForm />} />
+                        </Route>
                       </Route>
                     </Route>
                   </Route>

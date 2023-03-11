@@ -28,11 +28,12 @@ class OrdersController extends Controller
             case RoleEnum::WHAREHOUSE_MANAGER:
                 return new JsonResponse(Order::where('order_status_id', OrderStatusEnum::SUBMITTED)->get(), Response::HTTP_OK);
             case RoleEnum::MANAGER:
+//                $orders = Order::where('company_id', $user->company_id)->get();
                 $orders = Order::where('company_id', $user->company_id)->whereIn('order_status_id', [OrderStatusEnum::DRAFT, OrderStatusEnum::CANCELLED])->get();
                 return new JsonResponse($orders, Response::HTTP_OK);
         }
 
-        return new JsonResponse(Order::all(), Response::HTTP_OK);
+        return new JsonResponse('Algo salió mal', Response::HTTP_BAD_REQUEST);
     }
 
     public function store(StoreOrderRequest $request): JsonResponse

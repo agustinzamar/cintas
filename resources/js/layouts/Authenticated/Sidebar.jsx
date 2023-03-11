@@ -11,6 +11,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import HomeIcon from '@mui/icons-material/Home';
+import { useAuth } from '@/hooks/useAuth';
+import { RoleEnum } from '@/enums/RoleEnum';
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
@@ -39,6 +41,11 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export const Sidebar = ({ onToggleDrawer, open }) => {
+  const { auth: user } = useAuth();
+
+  const isAdmin =
+    user?.role?.id === RoleEnum.ADMIN || user?.role?.id === RoleEnum.SUPERADMIN;
+
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -55,15 +62,19 @@ export const Sidebar = ({ onToggleDrawer, open }) => {
       </Toolbar>
       <Divider />
       <List component="nav">
-        <ListItem text="Inicio" icon={<HomeIcon />} url="/" />
+        {isAdmin && <ListItem text="Inicio" icon={<HomeIcon />} url="/" />}
         <ListItem text="Pedidos" icon={<ReceiptIcon />} url="/orders" />
-        <ListItem
-          text="Proveedores"
-          icon={<LocalShippingIcon />}
-          url="/vendors"
-        />
-        <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
-        <ListItem text="Sucursales" icon={<StoreIcon />} url="/branches" />
+        {isAdmin && (
+          <>
+            <ListItem
+              text="Proveedores"
+              icon={<LocalShippingIcon />}
+              url="/vendors"
+            />
+            <ListItem text="Usuarios" icon={<PeopleIcon />} url="/users" />
+            <ListItem text="Sucursales" icon={<StoreIcon />} url="/branches" />
+          </>
+        )}
       </List>
     </Drawer>
   );

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\OrderStatusEnum;
-use App\Traits\Multitenantable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory, Multitenantable, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $with = ['items', 'status', 'user', 'company'];
 
