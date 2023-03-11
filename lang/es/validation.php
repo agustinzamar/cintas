@@ -148,8 +148,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'phone' => [
+            'numeric' => 'El campo :attribute no debe tener más de :max caracteres.'
+        ],
+        'dni' => [
+            'numeric' => 'El campo :attribute no debe tener más de :max caracteres.'
         ],
     ],
 
@@ -164,6 +167,27 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'address' => 'dirección',
+        'city' => 'ciudad',
+        'company' => 'sucursal',
+        'company_id' => 'sucursal',
+        'country' => 'país',
+        'cuit' => 'CUIT',
+        'dni' => 'DNI',
+        'email' => 'correo electrónico',
+        'first_name' => 'nombre',
+        'last_name' => 'apellido',
+        'name' => 'nombre',
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmación de contraseña',
+        'phone' => 'teléfono',
+        'postal_code' => 'código postal',
+        'role' => 'rol',
+        'role_id' => 'rol',
+        'roles' => 'roles',
+        'state' => 'provincia',
+        'surname' => 'apellido',
+    ],
 
 ];

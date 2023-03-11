@@ -1,7 +1,7 @@
 export const parseBackendErrors = (error, defaultError) => {
-  return (
-    error.response.data.message ||
-    defaultError ||
-    'Lo sentimos, ha ocurrido un error.'
-  );
+  const backendError = error.response.data.errors
+    ? Object.values(error.response.data.errors)[0][0]
+    : null;
+
+  return backendError || defaultError || 'Lo sentimos, ha ocurrido un error.';
 };
