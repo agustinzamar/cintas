@@ -1,6 +1,8 @@
 #!/bin/bash
-composer install \
+git pull origin master \
+&& composer install \
 && php artisan migrate \
 && nvm install 16 \
 && nvm use 16 \
-&& npm install
+&& npm install \
+&& npm run build
