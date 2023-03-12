@@ -16,17 +16,25 @@ import { RoleEnum } from '@/enums/RoleEnum';
 import { useGetAllCompanies } from '@/hooks/companies/useGetAllCompanies';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
 import { parseBackendErrors } from '@/utils/validations';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const UserForm = () => {
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+    email: yup.string().required().email('Error de formato en el email'),
+  });
   const { userId } = useParams();
   const existingUser = useGetUser(userId);
   const navigate = useNavigate();
   const roles = useGetRoles();
   const { data: companies, isLoading: isLoadingCompanies } =
     useGetAllCompanies();
-  const { handleSubmit, control, reset, watch } = useForm({
+  const { handleSubmit, control, reset, watch, formState } = useForm({
     defaultValues: existingUser,
+    resolver: yupResolver(schema),
   });
+  const { errors } = formState;
   const { mutate, isLoading: isLoadingMutate } = useMutation(
     userId ? UsersApi.update : UsersApi.create
   );
@@ -63,6 +71,15 @@ export const UserForm = () => {
         ),
     });
   };
+
+  const showErrors = error => {
+    toast.error(errors[error]?.message);
+  };
+
+  useEffect(() => {
+    let err = Object.keys(errors);
+    if (err.length > 0) err.map(e => showErrors(e));
+  }, [errors]);
 
   const title = `${existingUser ? 'Modificar' : 'Crear'} usuario`;
   const isLoading = isLoadingCompanies || isLoadingMutate;
