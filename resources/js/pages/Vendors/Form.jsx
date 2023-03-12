@@ -12,17 +12,24 @@ import VendorsApi from '@/api/VendorsApi';
 import { useEffect } from 'react';
 import { CancelButton } from '@/components/common/Buttons/CancelButton';
 import { parseBackendErrors } from '@/utils/validations';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const VendorForm = () => {
+  const schema = yup.object().shape({
+    email: yup.string().email('Error de formato en el email'),
+  });
   const { vendorId } = useParams();
   const existingVendor = useGetVendor(vendorId);
   const navigate = useNavigate();
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, control, reset, formState } = useForm({
     defaultValues: existingVendor,
+    resolver: yupResolver(schema),
   });
   const { mutate, isLoading: isLoadingMutate } = useMutation(
     vendorId ? VendorsApi.update : VendorsApi.create
   );
+  const { errors } = formState;
 
   useEffect(() => {
     if (existingVendor) {
@@ -47,6 +54,15 @@ export const VendorForm = () => {
         ),
     });
   };
+
+  const showErrors = error => {
+    toast.error(errors[error]?.message);
+  };
+
+  useEffect(() => {
+    let err = Object.keys(errors);
+    if (err.length > 0) err.map(e => showErrors(e));
+  }, [errors]);
 
   const title = `${existingVendor ? 'Modificar' : 'Crear'} proveedor`;
 
