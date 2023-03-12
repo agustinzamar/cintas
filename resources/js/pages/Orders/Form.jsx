@@ -98,7 +98,9 @@ export const OrdersForm = () => {
         </Button>
         {!user.company && (
           <FormControl sx={{ width: '200px', marginLeft: '1rem' }}>
-            <InputLabel id="company_id">Sucursal</InputLabel>
+            <InputLabel id="company_id" required>
+              Sucursal
+            </InputLabel>
             <MuiSelect
               value={companyId || ''}
               name="company_id"
