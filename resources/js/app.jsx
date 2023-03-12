@@ -29,6 +29,7 @@ import { Order } from '@/pages/Orders/Order';
 import { AdminMiddleware } from '@/routes/AdminMiddleware';
 import { ManagerMiddleware } from '@/routes/ManagerMiddleware';
 import { CreatePassword } from '@/pages/CreatePassword';
+import { Profile } from '@/pages/Profile';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -247,6 +248,7 @@ function App() {
                         </Route>
                       </Route>
                     </Route>
+                    <Route path="profile" element={<Profile />} />
                   </Route>
                 </Route>
 
