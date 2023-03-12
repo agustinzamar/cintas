@@ -28,6 +28,7 @@ import { PageNotFound } from '@/pages/404';
 import { Order } from '@/pages/Orders/Order';
 import { AdminMiddleware } from '@/routes/AdminMiddleware';
 import { ManagerMiddleware } from '@/routes/ManagerMiddleware';
+import { CreatePassword } from '@/pages/CreatePassword';
 
 const element = document.getElementById('app');
 const root = createRoot(element);
@@ -198,6 +199,11 @@ function App() {
                       exact
                       path="password-reset"
                       element={<RecoverPage />}
+                    />
+                    <Route
+                      exact
+                      path="password-create"
+                      element={<CreatePassword />}
                     />
                   </Route>
                 </Route>
