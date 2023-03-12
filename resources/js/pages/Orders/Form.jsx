@@ -50,6 +50,13 @@ export const OrdersForm = () => {
       id: existingOrder?.id,
     };
 
+    if (
+      !data.company_id &&
+      !user.company &&
+      statusId === OrderStatusEnum.SUBMITTED
+    )
+      return toast.error('Seleccione una sucursal');
+
     mutate(data, {
       onSuccess: () => {
         toast.success(
