@@ -5,14 +5,16 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Copyright } from '@/components/Copyright';
 import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
+import { Link } from 'react-router-dom';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
-import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
+import { useMutation } from 'react-query';
+import AuthApi from '@/api/AuthApi';
+import { parseBackendErrors } from '@/utils/validations';
+import { toast } from 'react-toastify';
 
 export function RecoverAccount() {
   const schema = yup.object().shape({
@@ -24,21 +26,18 @@ export function RecoverAccount() {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
   });
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const { state } = useLocation();
   const { errors } = formState;
+  const { mutate } = useMutation(AuthApi.resetPasswordEmail);
 
   const onSubmit = data => {
-    login(data)
-      .then(() => {
-        navigate(state?.path || '/');
-      })
-      .catch(() =>
+    mutate(data, {
+      onSuccess: () =>
+        toast.success('Se ha enviado un correo a su casilla de email.'),
+      onError: err =>
         toast.error(
-          'El email no existe en el sistema, pongase en contacto con el administrador.'
-        )
-      );
+          parseBackendErrors(err, 'Hubo un error al enviar el correo.')
+        ),
+    });
   };
 
   const showErrors = error => {

@@ -12,6 +12,14 @@ class AuthApi {
   async logout() {
     return await axiosIntance.delete('/logout');
   }
+
+  async resetPasswordEmail(data) {
+    return await axiosIntance.post('/recover-password', data);
+  }
+
+  async resetPassword(data) {
+    return await axiosIntance.post('/reset-password', data);
+  }
 }
 
 export default new AuthApi();

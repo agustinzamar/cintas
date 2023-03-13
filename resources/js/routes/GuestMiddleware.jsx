@@ -9,5 +9,5 @@ export function GuestMiddleware() {
     return <Outlet />;
   }
 
-  return <Navigate to={location.state.path} replace />;
+  return <Navigate to={location.state?.path || ''} replace />;
 }

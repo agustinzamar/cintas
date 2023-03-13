@@ -203,7 +203,7 @@ function App() {
                     />
                     <Route
                       exact
-                      path="password-create"
+                      path="password-create/:token"
                       element={<CreatePassword />}
                     />
                   </Route>
@@ -248,6 +248,7 @@ function App() {
                         </Route>
                       </Route>
                     </Route>
+
                     <Route path="profile" element={<Profile />} />
                   </Route>
                 </Route>

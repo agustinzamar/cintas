@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\RoleEnum;
 use App\Traits\Multitenantable;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Multitenantable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Multitenantable, CanResetPassword;
 
     protected $with = ['role', 'company'];
 

@@ -4,37 +4,49 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Copyright } from '@/components/Copyright';
 import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
+import { useNavigate, useParams } from 'react-router-dom';
 import logo from '@/assets/img/logo.png';
 import Bubble from '@/assets/img/bubble.png';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
+import { useMutation } from 'react-query';
+import AuthApi from '@/api/AuthApi';
+import { parseBackendErrors } from '@/utils/validations';
 
 export function CreatePassword() {
+  const { token } = useParams();
   const schema = yup.object().shape({
-    newPassword: yup.string().required('Campo contraseña requerido'),
-    confirmPassword: yup
+    password: yup.string().required('Campo contraseña requerido'),
+    password_confirmation: yup
       .string()
       .required('Campo confirmar contraseña requerido')
-      .oneOf([yup.ref('newPassword'), null], 'Las contraseñas no coinciden'),
+      .oneOf([yup.ref('password'), null], 'Las contraseñas no coinciden'),
+    email: yup.string().email().required('Campo correo electrónico requerido'),
   });
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
   });
   const navigate = useNavigate();
-  const { login } = useAuth();
-  const { state } = useLocation();
   const { errors } = formState;
+  const { mutate } = useMutation(AuthApi.resetPassword);
 
   const onSubmit = data => {
-    login(data)
-      .then(() => {
-        navigate(state?.path || '/');
-      })
-      .catch(() => toast.error('Ocurrio un error.'));
+    mutate(
+      { ...data, token },
+      {
+        onSuccess: () => {
+          toast.success('Su contraseña ha sido actualizada con éxito');
+          navigate('/login');
+        },
+        onError: error =>
+          parseBackendErrors(
+            error,
+            'Ocurrió un error al cambiar la contraseña'
+          ),
+      }
+    );
   };
 
   const showErrors = error => {
@@ -92,10 +104,18 @@ export function CreatePassword() {
             margin="normal"
             required
             fullWidth
+            label="Correo electrónico"
+            type="email"
+            {...register('email', { required: true })}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             label="Nueva contraseña"
             type="password"
             autoComplete="current-password"
-            {...register('newPassword', { required: true })}
+            {...register('password', { required: true })}
           />
           <TextField
             margin="normal"
@@ -104,7 +124,7 @@ export function CreatePassword() {
             label="Confirmar contraseña"
             type="password"
             autoComplete="current-password"
-            {...register('confirmPassword', { required: true })}
+            {...register('password_confirmation', { required: true })}
           />
           <Button
             type="submit"

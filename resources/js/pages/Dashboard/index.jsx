@@ -131,7 +131,7 @@ export function Dashboard() {
                 data: [
                   {
                     x: 'Enero',
-                    y: 0,
+                    y: 100,
                   },
                   {
                     x: 'Febrero',
@@ -139,7 +139,7 @@ export function Dashboard() {
                   },
                   {
                     x: 'Marzo',
-                    y: 130,
+                    y: -130,
                   },
                   {
                     x: 'Abril',
