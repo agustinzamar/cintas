@@ -10,6 +10,6 @@ class ProvincesController extends Controller
 {
     public function index(): JsonResponse
     {
-        return new JsonResponse(Province::all(), Response::HTTP_OK);
+        return new JsonResponse(Province::orderBy('name', 'ASC')->get(), Response::HTTP_OK);
     }
 }

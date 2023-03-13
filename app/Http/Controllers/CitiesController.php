@@ -17,6 +17,6 @@ class CitiesController extends Controller
     public function getByProvince(int $provinceId): JsonResponse
     {
         Province::findOrFail($provinceId);
-        return new JsonResponse(City::where('province_id', $provinceId)->get(), Response::HTTP_OK);
+        return new JsonResponse(City::where('province_id', $provinceId)->orderBy('name', 'ASC')->get(), Response::HTTP_OK);
     }
 }
