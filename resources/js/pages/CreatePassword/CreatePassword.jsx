@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import AuthApi from '@/api/AuthApi';
 import { parseBackendErrors } from '@/utils/validations';
+import { Loader } from '@/components/common/Loader';
 
 export function CreatePassword() {
   const { token } = useParams();
@@ -30,7 +31,7 @@ export function CreatePassword() {
   });
   const navigate = useNavigate();
   const { errors } = formState;
-  const { mutate } = useMutation(AuthApi.resetPassword);
+  const { mutate, isLoading } = useMutation(AuthApi.resetPassword);
 
   const onSubmit = data => {
     mutate(
@@ -48,7 +49,6 @@ export function CreatePassword() {
       }
     );
   };
-
   const showErrors = error => {
     toast.error(errors[error]?.message);
   };
@@ -98,6 +98,7 @@ export function CreatePassword() {
           alignItems: 'center',
         }}
       >
+        {isLoading && <Loader />}
         <img src={logo} alt="Logo" width="250" />
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField

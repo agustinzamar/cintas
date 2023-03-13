@@ -15,6 +15,7 @@ import { useMutation } from 'react-query';
 import AuthApi from '@/api/AuthApi';
 import { parseBackendErrors } from '@/utils/validations';
 import { toast } from 'react-toastify';
+import { Loader } from '@/components/common/Loader';
 
 export function RecoverAccount() {
   const schema = yup.object().shape({
@@ -27,7 +28,7 @@ export function RecoverAccount() {
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
-  const { mutate } = useMutation(AuthApi.resetPasswordEmail);
+  const { mutate, isLoading } = useMutation(AuthApi.resetPasswordEmail);
 
   const onSubmit = data => {
     mutate(data, {
@@ -61,6 +62,7 @@ export function RecoverAccount() {
         justifyContent: 'center',
       }}
     >
+      {isLoading && <Loader />}
       <img
         src={Bubble}
         alt="asset_bubble"
