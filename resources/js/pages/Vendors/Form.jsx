@@ -42,7 +42,7 @@ export const VendorForm = () => {
     mutate(data, {
       onSuccess: () => {
         toast.success(
-          `Usuario ${vendorId ? 'actualizado' : 'creado'} exitosamente`
+          `Proveedor ${vendorId ? 'actualizado' : 'creado'} exitosamente`
         );
         if (!vendorId) {
           navigate(-1);

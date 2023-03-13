@@ -149,10 +149,10 @@ return [
 
     'custom' => [
         'phone' => [
-            'numeric' => 'El campo :attribute no debe tener más de :max caracteres.'
+            'max' => 'El campo :attribute no debe tener más de :max caracteres.'
         ],
         'dni' => [
-            'numeric' => 'El campo :attribute no debe tener más de :max caracteres.'
+            'max' => 'El campo :attribute no debe tener más de :max caracteres.'
         ],
     ],
 

@@ -28,8 +28,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:100'],
             'email' => ['string', 'required', 'max:100', 'email', 'unique:users,email'],
-            'dni' => ['string', 'nullable', 'max:8', 'numeric'],
-            'phone' => ['string', 'nullable', 'max:11', 'numeric'],
+            'dni' => ['nullable', 'digits_between:7,8', 'numeric'],
+            'phone' => ['nullable', 'digits_between:10,11', 'numeric'],
             'role_id' => ['numeric', 'required', 'exists:roles,id', Rule::notIn([RoleEnum::SUPERADMIN])], // Do not allow to create superadmins via API
             'company_id' => ['numeric', 'exists:companies,id', Rule::requiredIf($this->get('role_id') === RoleEnum::MANAGER)],
         ];

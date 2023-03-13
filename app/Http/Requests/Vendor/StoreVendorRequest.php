@@ -26,7 +26,7 @@ class StoreVendorRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:100'],
             'email' => ['string', 'nullable', 'max:100'],
-            'phone' => ['string', 'nullable', 'max:11'],
+            'phone' => ['numeric', 'nullable', 'digits_between:10,11'],
             'website' => ['string', 'nullable', 'max:100'],
             'address' => ['string', 'nullable', 'max:100'],
         ];
