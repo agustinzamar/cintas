@@ -8,7 +8,6 @@ const headCells = [
   { id: 'city', label: 'Ciudad', isSortable: true },
   { id: 'province', label: 'Provincia', isSortable: true },
   { id: 'address', label: 'Dirección', isSortable: true },
-  { id: 'status', label: 'Estado', isSortable: true },
   { id: 'actions', label: '', isSortable: false },
 ];
 export const BranchesTable = () => {

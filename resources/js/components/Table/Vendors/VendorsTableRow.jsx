@@ -34,7 +34,6 @@ export const VendorsTableRow = ({ data: vendor }) => {
       <TableCell>{vendor.name}</TableCell>
       <TableCell>{vendor.email}</TableCell>
       <TableCell>{vendor.phone}</TableCell>
-      <TableCell>{vendor.deleted_at ? 'Inactivo' : 'Activo'}</TableCell>
       <TableCell align="right">
         <EditButton
           tooltipText="Modificar proveedor"

@@ -35,7 +35,6 @@ export const BranchesTableRow = ({ data: branch }) => {
       <TableCell>{branch.city.name}</TableCell>
       <TableCell>{branch.city.province.name}</TableCell>
       <TableCell>{branch.address}</TableCell>
-      <TableCell>{branch.deleted_at ? 'Inactivo' : 'Activo'}</TableCell>
       <TableCell align="right">
         <EditButton
           tooltipText="Modificar sucursal"

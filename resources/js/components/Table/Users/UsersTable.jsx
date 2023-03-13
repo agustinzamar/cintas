@@ -8,7 +8,6 @@ const headCells = [
   { id: 'email', label: 'Email', isSortable: true },
   { id: 'role', label: 'Rol', isSortable: true },
   { id: 'branch', label: 'Sucursal', isSortable: true },
-  { id: 'status', label: 'Estado', isSortable: true },
   { id: 'actions', label: '', isSortable: false },
 ];
 export const UsersTable = () => {

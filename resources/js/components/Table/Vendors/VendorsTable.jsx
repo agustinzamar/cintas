@@ -7,7 +7,6 @@ const headCells = [
   { id: 'name', label: 'Nombre', isSortable: true },
   { id: 'email', label: 'Email', isSortable: true },
   { id: 'phone', label: 'Teléfono', isSortable: true },
-  { id: 'status', label: 'Estado', isSortable: true },
   { id: 'actions', label: '', isSortable: false },
 ];
 export const VendorsTable = () => {
